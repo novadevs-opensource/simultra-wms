@@ -1,0 +1,78 @@
+<?php
+
+namespace Novadevs\Simultra\Base\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Auth;
+
+class Report extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'reports';
+
+    protected $fillable = ['data'];
+
+    /**
+     * Undocumented function
+     *
+     * @param string|array $action
+     * @throws Exception 404
+     * @return void
+     */
+    public function _record($action)
+    {
+        $u = Auth::user(); // Get auth user data
+        
+        try {
+            // Get all user records (it must be only one record)
+            $c = Self::where('user', '=', $u->id)->firstOrFail();
+        } catch (\Exception $t) { 
+            //404 if any record exists for this user
+            $c = new Report();
+            $c->user = $u->id;
+            $c->data = json_encode(array());
+        }
+
+        try {
+            $c->data = $this->_prepareRecord($action, $c);
+            $c->save();   
+        } catch (\Exception $e) {
+            // Generating flash message
+            $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+            $request->session()->flash('alert-class', 'alert-danger'); 
+        }
+    }
+
+    /**
+     * Prepare data to be persisted
+     *
+     * @param array|object $action
+     * @param object $c
+     * @return string JSON
+     */
+    public function _prepareRecord($action = null, $c)
+    {
+        $dataRecord = json_decode($c->data);
+        $r = array(
+            'time' => date('Y-m-d H:m:s'),
+            'action' => $action,
+        );
+        array_push($dataRecord , $r);
+
+        return json_encode($dataRecord);
+    }
+
+    /**
+     * One to One relation
+     *
+     * @return object
+     */
+    public function u()
+    {
+        return $this->belongsTo('App\User', 'user', 'id');
+    }
+}
