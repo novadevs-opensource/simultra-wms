@@ -32,7 +32,7 @@ class InstallModule extends Command
         'layouts/topbar-nav.stub'   => 'layouts/topbar-nav.blade.php',
 
         'home.stub'                 => 'home.blade.php',
-
+	'welcome.stub'		    => 'welcome.blade.php',
         'setup/setup.stub'          => 'setup/setup.blade.php',
         'setup/setup.modules.stub'  => 'setup/setup-modules.blade.php',
 
@@ -128,12 +128,6 @@ class InstallModule extends Command
     protected function exportViews()
     {
         foreach ($this->views as $key => $value) {
-            if ( file_exists( $view = resource_path('views/'.$value) ) ) {
-                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
-                    continue;
-                }
-            }
-
             copy(
                 __DIR__.'/stubs/install/views/'.$key,
                 $view
