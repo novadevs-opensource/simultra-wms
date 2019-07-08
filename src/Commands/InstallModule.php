@@ -138,6 +138,7 @@ class InstallModule extends Command
                 __DIR__.'/stubs/install/views/'.$key,
                 $view
             );
+	    echo "The file [{$value}] have been replaced."
         }
     }
 }
