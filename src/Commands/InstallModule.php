@@ -128,6 +128,7 @@ class InstallModule extends Command
     protected function exportViews()
     {
         foreach ($this->views as $key => $value) {
+	    $view = resource_path('views/'.$value);
             copy(
                 __DIR__.'/stubs/install/views/'.$key,
                 $view
