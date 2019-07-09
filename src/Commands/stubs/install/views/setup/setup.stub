@@ -18,52 +18,29 @@
 @endsection
 
 @section('sidebar-content')
-    <li class="{{isActiveRoute('home')}}">
-        <a href="{{route('home')}}">
-            <span class="nav-label">{{__('My dashboard')}}</span>
-        </a>
-    </li>
     <li class="{{isActiveRoute('setup')}}">
         <a href="{{route('setup.setup')}}">
             <span class="nav-label">{{__('Setup')}}</span>
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('setup.setup')}}"><a href="{{route('setup.setup')}}">{{__('Info')}}</a></li>
-            <li class="{{isActiveRouteChild('setup.company.show')}}">
-            @if ( isset($bc->id) )
-                <a href="{{route('setup.company.show', $bc->id)}}">
-                    {{__('Company/Organisation')}}
+            <li class="{{isActiveRouteChild('setup.setup')}}">
+                <a href="{{route('setup.setup')}}">
+                    {{__('General')}}
                 </a>
-            @else
-                <a href="{{route('setup.company.create')}}">
-                    {{__('Company/Organisation')}}
-                </a>
-            @endif
             </li>
-            <li class="{{isActiveRouteChild('setup.modules')}}"><a href="{{route('setup.modules')}}">{{__('Modules')}}</a></li>
-            <li class="{{isActiveRouteChild('setup.menus')}}"><a href="{{route('setup.menus')}}">{{__('Menus')}}</a></li>
-            <li class="{{isActiveRouteChild('setup.display')}}"><a href="{{route('setup.display')}}">{{__('Display')}}</a></li>
-            <li><a href="#">{{__('Translation')}}</a></li>
-            <li><a href="#">{{__('Widgets')}}</a></li>
-            <li><a href="#">{{__('Alerts')}}</a></li>
-            <li><a href="#">{{__('Security')}}</a></li>
-            <li><a href="#">{{__('Limits and accuracy')}}</a></li>
-            <li><a href="#">{{__('PDF')}}</a></li>
-            <li><a href="#">{{__('E-mails')}}</a></li>
-            <li><a href="#">{{__('SMS')}}</a></li>
-            <li><a href="#">{{__('Dictionaries')}}</a></li>
-            <li><a href="#">{{__('Other setup')}}</a></li>
+            @if ( checkRole(Auth()->user()->role, 'ADMIN') )
+            <li>
+                <a href="#">
+                    <span class="nav-label">{{__('Users & Groups')}}</span>
+                </a>
+            </li>
+            @endif
         </ul>
     </li>
-    <li>
-        <a href="#">
-            <span class="nav-label">{{__('Admin tools')}}</span>
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            <span class="nav-label">{{__('Users & Groups')}}</span>
+    <li class="{{isActiveRoute('reports')}}">
+        <a href="{{route('report')}}">
+            {{__('Reports')}}
         </a>
     </li>
 @endsection
@@ -71,24 +48,66 @@
 @section('content')
 <div class="container">
     <div class="row">
-    
-        <div class="col-12">
-            <p>
-                {{__("The setup area is for initial setup parameters before starting to use Dolibarr. Those features can be used by administrator users only. The two most important setup steps are the first two in the setup menu on the left: Company/Organisation setup page and Modules setup page:")}}
-            </p>
-
-            <p>
-                {{__("Parameters in menu Setup -> Company/Organisation are required because submitted data are used on Dolibarr displays and to customize the default behaviour of the software (for country-related features for example).")}}
-            </p>
-
-            <p>
-                {{__("Parameters in menu Setup -> Modules are required because Dolibarr is not a monolithic ERP/CRM but a collection of several modules, all more or less independent. New features will be added to menus for every module you'll enable.")}}
-            </p>
-
-            <p>
-                {{__("Other menu entries manage optional parameters.")}}
-            </p>
+        <div class="col-4">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>
+                        <i class="fa fa-language"></i> {{__('Languaje setup')}} 
+                    </h3>
+                </div>
+                <div class="ibox-content">
+                    <p>
+                        {{__('Select your preferred language')}}
+                    </p>
+                    @foreach (locales() as $i)
+                        <a href="lang/{{$i}}" class="btn btn-{{isActiveLocale( $i, request() )}}">
+                            @switch($i)
+                                @case('es')
+                                    Spanish
+                                    @break
+                                @case('en')
+                                    English
+                                    @break
+                                @default
+                            @endswitch
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            @if ( checkRole(Auth()->user()->role, 'ADMIN') )
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>
+                        <i class="fa fa-refresh"></i> {{__('Restore default data')}} 
+                    </h3>
+                </div>
+                <div class="ibox-content">
+                    <p>
+                        {{__('Restore database to defaults')}}
+                    </p>
+                    <a href="" class="btn btn-primary" id="restoreData">
+                        Restore
+                    </a>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>
+@endsection
+
+@section('custom-js')
+    <script>
+        document.getElementById('restoreData').addEventListener('click', function(e){
+            var retVal = confirm("{{__('Are you sure? This action will erase all your custom data')}}");
+            if( retVal == true ) {
+                return true;
+            } else {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 @endsection
