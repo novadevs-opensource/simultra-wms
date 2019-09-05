@@ -21,7 +21,7 @@
      <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
 </head>
-<body class="pace-done">
+<body class="pace-done skin-3">
 
     <div class="pace  pace-inactive">
         <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
