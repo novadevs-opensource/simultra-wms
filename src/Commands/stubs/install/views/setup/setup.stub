@@ -103,7 +103,10 @@
         document.getElementById('restoreData').addEventListener('click', function(e){
             var retVal = confirm("{{__('Are you sure? This action will erase all your custom data')}}");
             if( retVal == true ) {
-                return true;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", "{{route('default')}}", true ); // false for synchronous request
+                xmlHttp.send();
+                return xmlHttp.responseText;
             } else {
                 e.preventDefault();
                 return false;
