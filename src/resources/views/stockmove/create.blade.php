@@ -55,13 +55,13 @@
             </li>
         </ul>
     </li>
-    <li class="{{isActiveRoute('stockmove.index')}}">
+    <li class="{{isActiveRoute('stockmove.create')}}">
         <a href="{{route('stockmove.index')}}">
             <span class="nav-label">{{__('Traceability')}}</span>
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('whtoolindex')}}">
+            <li class="{{isActiveRouteChild('stockmove.create')}}">
                 <a href="{{route('stockmove.index')}}">
                     {{__('Stock moves')}}
                 </a>

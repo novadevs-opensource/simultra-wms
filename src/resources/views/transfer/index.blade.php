@@ -24,7 +24,7 @@
 @endsection
 
 @section('sidebar-content')
-    <li class="{{isActiveRouteChild('warehouse.warehouse')}}">
+    <li class="active">
         <a href="{{route('warehouse.warehouse')}}">
             <span class="nav-label">{{__('Operations')}}</span>
             <span class="fa arrow"></span>

@@ -96,8 +96,8 @@
             {{__('Partners')}}
         </a>
     </li>
-    <li class="{{isActiveRoute('location.index')}}">
-        <a href="{{route('warehouse.index')}}">
+    <li class="{{isActiveRoute('setup.setup')}}">
+        <a href="{{route('setup.setup')}}">
             <span class="nav-label">{{__('Configuration')}}</span>
             <span class="fa arrow"></span>
         </a>

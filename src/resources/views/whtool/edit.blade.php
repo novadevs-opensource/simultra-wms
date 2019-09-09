@@ -42,13 +42,13 @@
             </li>
         </ul>
     </li>
-    <li class="{{isActiveRoute('whtool.index')}}">
+    <li class="{{isActiveRoute('whtool.edit')}}">
         <a href="{{route('whtool.index')}}">
             <span class="nav-label">{{__('WH Tools management')}}</span>
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('whtoolindex')}}">
+            <li class="{{isActiveRouteChild('whtool.edit')}}">
                 <a href="{{route('whtool.index')}}">
                     {{__('WH Tools')}}
                 </a>

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Simultra Warehouse Management Tool - @yield('title')</title>
+    <title>Dolivel - @yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -63,23 +63,15 @@
     </div>
 
     <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme.js') !!}" type="text/javascript"></script>
-    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme-plugins.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
     
     @if ( Request::cookie('mode') == 2)
         <script>
             $(":submit.btn-danger").hide();
         </script>
     @endif
-    {{-- <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme-plugins.js') !!}" type="text/javascript"></script> --}}
-    {{-- <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script> --}}
-    @yield('custom-js')
 
+    @yield('custom-js')
 </body>
 </html>

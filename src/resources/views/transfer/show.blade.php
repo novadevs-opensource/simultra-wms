@@ -27,7 +27,7 @@
 @endsection
 
 @section('sidebar-content')
-    <li class="{{isActiveRouteChild('warehouse.warehouse')}}">
+    <li class="{{isActiveRoute('transfer')}}">
         <a href="{{route('warehouse.warehouse')}}">
             <span class="nav-label">{{__('Operations')}}</span>
             <span class="fa arrow"></span>
@@ -38,7 +38,7 @@
                     {{__('All operations')}}
                 </a>
             </li>
-            <li class="{{isActiveRouteChild('transfer.index')}}" id="step2-1-transfer">
+            <li class="{{isActiveRoute('transfer')}}" id="step2-1-transfer">
                 <a href="{{route('transfer.index')}}">
                     {{__('Transfers')}}
                 </a>

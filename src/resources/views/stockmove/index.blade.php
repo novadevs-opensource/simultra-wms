@@ -58,7 +58,7 @@
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('whtoolindex')}}">
+            <li class="{{isActiveRouteChild('stockmove.index')}}">
                 <a href="{{route('stockmove.index')}}">
                     {{__('Stock moves')}}
                 </a>

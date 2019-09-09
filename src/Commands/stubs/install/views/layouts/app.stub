@@ -65,14 +65,13 @@
     <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme.js') !!}" type="text/javascript"></script>
     <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme-plugins.js') !!}" type="text/javascript"></script>
     <script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
-    {{-- <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script> --}}
+    
+    @if ( Request::cookie('mode') == 2)
+        <script>
+            $(":submit.btn-danger").hide();
+        </script>
+    @endif
+
     @yield('custom-js')
 </body>
 </html>

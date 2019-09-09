@@ -60,6 +60,8 @@
                                 <th>{{__('#')}}</th>
                                 <th>{{__('Date')}}</th>
                                 <th>{{__('Action')}}</th>
+                                <th>{{__('Score')}}</th>
+                                <th>{{__('Practice')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,6 +78,12 @@
                                 </td>
                                 <td>
                                     {{$i->action}}
+                                </td>
+                                <td>
+                                    {{$i->points}}
+                                </td>
+                                <td>
+                                    {{$i->category}}
                                 </td>
                             </tr>
                             @endforeach

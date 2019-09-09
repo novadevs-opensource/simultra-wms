@@ -48,7 +48,7 @@
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('whtoolindex')}}">
+            <li class="{{isActiveRouteChild('whtool.index')}}">
                 <a href="{{route('whtool.index')}}">
                     {{__('WH Tools')}}
                 </a>

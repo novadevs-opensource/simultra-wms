@@ -68,13 +68,13 @@
             </li>
         </ul>
     </li>
-    <li class="{{isActiveRoute('product.index')}}">
+    <li class="{{isActiveRoute('product.show')}}">
         <a href="{{route('product.index')}}">
             <span class="nav-label">{{__('Products')}}</span>
             <span class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-            <li class="{{isActiveRouteChild('product.index')}}">
+            <li class="{{isActiveRouteChild('product.show')}}">
                 <a href="{{route('product.index')}}">
                     {{__('Products')}}
                 </a>
