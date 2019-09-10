@@ -124,26 +124,90 @@
                         @method('PUT')
                         {{ csrf_field() }}
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label" for="name"><b>{{ __('Product name') }}</b></label>
-							<div class="col-sm-10">
-                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $o->name }}">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                 @enderror
-							</div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="name"><b>{{ __('Product name') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $o->name }}">
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="ean13"><b>{{ __('EAN13 Barcode') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" name="ean13" id="ean13" value="{{ $o->ean13 }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="internal_reference"><b>{{ __('Internal reference') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" name="internal_reference" id="internal_reference" value="{{ $o->internal_reference }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_volume"><b>{{ __('Weight volume') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_volume') is-invalid @enderror" name="weight_volume" id="weight_volume" placeholder="0,00" value="{{ $o->weight_volume }}">
+                                        @error('weight_volume')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_gross_weight"><b>{{ __('Weight gross weight') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_gross_weight') is-invalid @enderror" name="weight_gross_weight" id="weight_gross_weight" placeholder="0,00" value="{{ $o->weight_gross_weight }}">
+                                        @error('weight_gross_weight')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_net_weight"><b>{{ __('Weight volume') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_net_weight') is-invalid @enderror" name="weight_net_weight" id="weight_net_weight" placeholder="0,00" value="{{ $o->weight_net_weight }}">
+                                        @error('weight_net_weight')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group row">
-							<label class="col-sm-2 col-form-label" for="for_sale"><b>{{ __('For sale') }}</b></label>
-							<div class="col-sm-10">
-								@if ($o->for_sale == 1)
-                                <input type="checkbox" class="form-control" name="for_sale" id="for_sale" checked="checked">
-                                @else
-                                <input type="checkbox" class="form-control" name="for_sale" id="for_sale">
-                                @endif
-							</div>
+							<div class="col-sm-3">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" class="form-control" name="for_sale" id="for_sale" placeholder="0" @if ($o->for_sale == 1)checked="checked"@endif>
+                                    <label for="for_sale">
+                                            <b>{{ __('For sale') }}</b>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" class="form-control" name="active" id="active" placeholder="0" @if ($o->is_active == 1)checked="checked"@endif>
+                                    <label for="active">
+                                            <b>{{ __('Is active?') }}</b>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -188,72 +252,6 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="weight_volume"><b>{{ __('Weight volume') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="number" class="form-control @error('weight_volume') is-invalid @enderror" name="weight_volume" id="weight_volume" placeholder="0,00" value="{{ $o->weight_volume }}">
-                                        @error('weight_volume')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="weight_gross_weight"><b>{{ __('Weight gross weight') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="number" class="form-control @error('weight_gross_weight') is-invalid @enderror" name="weight_gross_weight" id="weight_gross_weight" placeholder="0,00" value="{{ $o->weight_gross_weight }}">
-                                        @error('weight_gross_weight')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="weight_net_weight"><b>{{ __('Weight volume') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="number" class="form-control @error('weight_net_weight') is-invalid @enderror" name="weight_net_weight" id="weight_net_weight" placeholder="0,00" value="{{ $o->weight_net_weight }}">
-                                        @error('weight_net_weight')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group row">
-                                        <label class="col-4 col-form-label" for="active"><b>{{ __('Is active?') }}</b>
-                                                                                   
-                                        </label>
-                                        <div class="col-8">
-                                                @if ($o->active == 1)
-                                                <input type="checkbox" name="active" id="active" checked="checked" class="form-control">
-                                                @else
-                                                <input type="checkbox" name="active" id="active" checked="" class="form-control">
-                                                @endif 
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="ean13"><b>{{ __('EAN13 Barcode') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" name="ean13" id="ean13" value="{{ $o->ean13 }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="internal_reference"><b>{{ __('Internal reference') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" name="internal_reference" id="internal_reference" value="{{ $o->internal_reference }}">
                                     </div>
                                 </div>
                             </div>

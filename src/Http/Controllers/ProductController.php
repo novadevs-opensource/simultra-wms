@@ -131,7 +131,7 @@ class ProductController extends Controller
      * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, Product $product)
     {
         $m = StockMove::where('product', $product->id)->get();
         $p = Product::find($product->id);

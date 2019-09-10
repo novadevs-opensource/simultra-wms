@@ -122,25 +122,95 @@
                 <div class="ibox-content">
                     <form  role="form" method="POST" action="{{route('product.store')}}">
                         {{ csrf_field() }}
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label" for="name"><b>{{ __('Product name') }}</b></label>
-							<div class="col-sm-10">
-                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                 @enderror
-							</div>
+                        <div class="form-group row">
+                            
+                            <div class="col-6">
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="name"><b>{{ __('Product name') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="ean13"><b>{{ __('EAN13 Barcode') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" name="ean13" id="ean13">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="internal_reference"><b>{{ __('Internal reference') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" name="internal_reference" id="internal_reference">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_volume"><b>{{ __('Weight volume') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_volume') is-invalid @enderror" name="weight_volume" id="weight_volume" placeholder="0,00">
+                                        @error('weight_volume')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_gross_weight"><b>{{ __('Weight gross weight') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_gross_weight') is-invalid @enderror" name="weight_gross_weight" id="weight_gross_weight" placeholder="0,00">
+                                        @error('weight_gross_weight')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="weight_net_weight"><b>{{ __('Weight volume') }}</b></label>
+                                    <div class="col-8">
+                                        <input type="number" class="form-control @error('weight_net_weight') is-invalid @enderror" name="weight_net_weight" id="weight_net_weight" placeholder="0,00">
+                                        @error('weight_net_weight')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group row">
-							<label class="col-sm-2 col-form-label" for="for_sale"><b>{{ __('For sale') }}</b></label>
-							<div class="col-sm-10">
-								<input type="checkbox" class="form-control" name="for_sale" id="for_sale" placeholder="0">
-							</div>
+							<div class="col-sm-3">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" class="form-control" name="for_sale" id="for_sale" placeholder="0" checked=>
+                                    <label for="for_sale">
+                                            <b>{{ __('For sale') }}</b>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" class="form-control" name="active" id="active" placeholder="0" checked="">
+                                    <label for="active">
+                                            <b>{{ __('Is active?') }}</b>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-
+                          
                         <div class="form-group row">
                             <div class="col-6">
                                 <div class="form-group row">
@@ -186,43 +256,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-6">
-                                {{-- <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="active"><b>{{ __('Is active?') }}</b></label>
-                                    <div class="i-checks">
-                                        <label class=""> 
-                                            <div class="icheckbox_square-green checked" style="position: relative;">
-                                                <input type="checkbox" value="" checked="" style="position: absolute; opacity: 0;">
-                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                            </div> 
-                                            <i></i> Option two checked
-                                        </label>
-                                    </div>
-                                </div> --}}
-                                <div class="form-group row">
-                                        <label class="col-4 col-form-label" for="active"><b>{{ __('Is active?') }}</b>
-                                                                                   
-                                        </label>
-                                        <div class="col-8">
-                                                <input type="checkbox" name="active" id="active" checked="" class="form-control"> 
-                                        </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="ean13"><b>{{ __('EAN13 Barcode') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" name="ean13" id="ean13">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="internal_reference"><b>{{ __('Internal reference') }}</b></label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" name="internal_reference" id="internal_reference">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -246,15 +279,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('custom-js')
-    <script>
-        // $(document).ready(function () {
-        //     $('.i-checks').iCheck({
-        //         checkboxClass: 'icheckbox_square-green',
-        //         radioClass: 'iradio_square-green',
-        //     });
-        // });
-    </script>
 @endsection
