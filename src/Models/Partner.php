@@ -24,7 +24,7 @@ class Partner extends Model
      */
     public function wh()
     {
-        return $this->hasOne(Warehouse::class, 'id');
+        return $this->belongsTo(Warehouse::class,'warehouse', 'id');
     }
 
     /**

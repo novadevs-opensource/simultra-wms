@@ -60,4 +60,12 @@ class Location extends Model
         ->withPivot('product_id','qty')
         ->withTimestamps(); 
     }
+
+    /**
+     * Get the warehouse whick owns each location.
+     */
+    public function partner()
+    {
+        return $this->hasOne(Warehouse::class, 'warehouse_fk', 'id');
+    }
 }
