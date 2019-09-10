@@ -4,6 +4,7 @@ namespace Novadevs\Simultra\Base\Http\Controllers;
 
 use Novadevs\Simultra\Base\Models\Location;
 use Novadevs\Simultra\Base\Models\Product;
+use Novadevs\Simultra\Base\Models\Warehouse;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -88,9 +89,11 @@ class LocationController extends Controller
     public function edit(Location $location)
     {
         $o = Location::all();
+        $w = Warehouse::all();
         $loc = Location::find($location->id);
         return view('location.edit')->with('loc', $loc)
-                                    ->with('o', $o);
+                                    ->with('o', $o)
+                                    ->with('w', $w);
     }
 
     /**
@@ -131,17 +134,39 @@ class LocationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Products  $products
+     * @throws Exception 
+     *      - SQLSTATE[23000]: Integrity constraint violation. 
+     *        When the location has some product stored on it.
      * @return \Illuminate\Http\Response
      */
     public function destroy(Location $location, Request $request)
     {
+        $l = Location::find($location->id);
+
         try {
-            Location::find($location->id)->delete();
+            $l->delete();
+
             $request->session()->flash('message', 'Registro borrado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-info'); 
+            
         } catch (\Exception $e) {
-            $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
-            $request->session()->flash('alert-class', 'alert-danger'); 
+            if ( $e->getCode() == 23000 ) {
+                try {
+                    $l->products()->newPivotStatement()->where('location_id', $location->id)->delete();
+                    $l->delete();
+
+                    $request->session()->flash('message', 'Registro borrado satisfactoriamente'); 
+                    $request->session()->flash('alert-class', 'alert-info');
+
+                } catch (\Throwable $th) {
+                    $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+                    $request->session()->flash('alert-class', 'alert-danger'); 
+                    
+                }
+            } else {
+                $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+                $request->session()->flash('alert-class', 'alert-danger'); 
+            }
         }
 
         return redirect()->route('location.index');

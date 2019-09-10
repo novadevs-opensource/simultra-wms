@@ -97,7 +97,8 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        //
+        $o = Warehouse::find($warehouse->id);
+        return view('warehouse.show')->with('o', $o);
     }
 
     /**

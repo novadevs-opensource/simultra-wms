@@ -62,10 +62,18 @@ class Location extends Model
     }
 
     /**
-     * Get the warehouse whick owns each location.
+     * Get the partner which owns each location.
      */
     public function partner()
     {
-        return $this->hasOne(Warehouse::class, 'warehouse_fk', 'id');
+        return $this->hasOne(Partner::class, 'warehouse_fk', 'id');
+    }
+
+    /**
+     * Get the warehouse where is the location.
+     */
+    public function warehouse()
+    {
+        return $this->hasOne(Warehouse::class, 'id', 'warehouse_fk');
     }
 }

@@ -129,6 +129,9 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Products  $products
+     * @throws Exception 
+     *      - SQLSTATE[23000]: Integrity constraint violation. 
+     *        When the product is allocated in some location.
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Product $product)
@@ -139,15 +142,33 @@ class ProductController extends Controller
         try {
             // Deleting stock moves for this product
             foreach ($m as $i) {
-                $i->destroy();
+                $i->destroy($i->id);
             }
-            Product::find($product->id)->delete();
+            $p->delete();
 
             $request->session()->flash('message', 'Registro borrado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-info'); 
+
         } catch (\Exception $e) {
-            $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
-            $request->session()->flash('alert-class', 'alert-danger'); 
+            if ( $e->getCode() == 23000 ) {
+                try {
+                    $p->locations()
+                            ->newPivotStatement()
+                            ->where('product_id', $product->id)
+                            ->delete();
+                    $p->delete();
+                    $request->session()->flash('message', 'Registro borrado satisfactoriamente'); 
+                    $request->session()->flash('alert-class', 'alert-info');
+
+                } catch (\Throwable $th) {
+                    $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+                    $request->session()->flash('alert-class', 'alert-danger');
+
+                }
+            } else {
+                $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+                $request->session()->flash('alert-class', 'alert-danger'); 
+            }
         }
 
         return redirect()->route('product.index');

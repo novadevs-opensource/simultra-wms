@@ -137,7 +137,13 @@
                                             <b>{{__('Is a part of')}}</b>
                                         </td>
                                         <td>
-                                            <a href="{{route('location.show', $loc->parentLocation()->id)}}">{{$loc->parentLocation()->name}}</a>
+                                            @if ( $loc->parentLocation() )
+                                                <a href="{{route('location.show', $loc->parentLocation()->id)}}" class="btn btn-primary btn-xs">
+                                                    {{$loc->parentLocation()->name}}
+                                                </a>
+                                            @else
+                                                --
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -258,9 +264,13 @@
                                             <span class="badge badge-warning">Z {{$loc->localization_z}}</span>
                                         </td>
                                         <td>
-                                            <a href="{{route('location.show', $loc->parentLocation()->id)}}" class="btn btn-primary btn-xs">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
+                                            @if ( $loc->parentLocation() )
+                                                <a href="{{route('location.show', $loc->parentLocation->id)}}" class="btn btn-primary btn-xs">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            @else
+                                                --
+                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
