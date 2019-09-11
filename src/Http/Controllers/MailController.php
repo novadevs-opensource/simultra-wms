@@ -16,7 +16,7 @@ class MailController extends Controller
      */
     public function index()
     {
-        $o = Mail::getInbox();        
+        $o = Mail::getInbox();
         return view('mail.inbox')->with('o', $o);
     }
 
@@ -53,7 +53,7 @@ class MailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         $o = Mail::find($id);
         $o->is_read = 1;
         $o->save();

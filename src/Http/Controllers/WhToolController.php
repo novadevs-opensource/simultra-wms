@@ -100,8 +100,10 @@ class WhToolController extends Controller
             [ 
                 'name'=>'required',
                 'identifier' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]
         );
+
         try {
             WhTool::find($whtool->id)->update($this->handleRequest($request));
 
@@ -155,6 +157,13 @@ class WhToolController extends Controller
         } else {
             $result['in_use'] = false;
         }
+
+        // Logo upload and storage handling
+        if ( isset($request->image) ){
+            $path = $request->file('image')->store('avatar','public');
+            $result['image'] = $path;
+        }
+
         return $result;
     }
 }

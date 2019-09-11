@@ -129,9 +129,6 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Products  $products
-     * @throws Exception 
-     *      - SQLSTATE[23000]: Integrity constraint violation. 
-     *        When the product is allocated in some location.
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Product $product)

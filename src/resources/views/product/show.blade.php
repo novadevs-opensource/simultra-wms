@@ -1,7 +1,7 @@
 @extends('layouts.app') 
 
 @section('title') 
-    {{ $o->name }} 
+    {{__('Show product')}} 
 @endsection 
 
 @section('page-header') 
@@ -116,27 +116,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <button id="print" class="btn btn-success"> {{__('Print product label')}} </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-6">
-            <div class="ibox" id="labelable">
+            <div class="ibox">
                 <div class="ibox-title">
                     <h3>
-                        <div class="row">
-                            <div class="col-8">
-                                {{$o->name}}
-                            </div>
-                            <div class="col-4">
-                                <img height="30px" style="margin-bottom:-10px" src="data:image/png;base64,{{ DNS1D::getBarcodePNG($o->ean13, "EAN13") }}" alt="barcode" />
-                            </div>
-                        </div>
+                        {{$o->name}}
                     </h3>
                 </div>
                 <div class="ibox-content">
@@ -144,14 +128,14 @@
                         <thead>
                             <tr>
                                 <th>{{__('Price')}}</th>
-                                <th>{{ __('EAN13 Code') }}</th>
+                                <th>{{ __('EAN13 Barcode') }}</th>
                                 <th>{{ __('Internal reference') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>{{$o->price}} €</td>
-                                <td>{{$o->ean13}}</td>
+                                <td><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($o->ean13, "EAN13") }}" alt="barcode" /></td>
                                 <td>{{$o->internal_reference}}</td>
                             </tr>
                         </tbody>
@@ -254,29 +238,3 @@
         </div>
     </div>
 @endsection
-@section('custom-js')
-<script>
-        document.getElementById('print').addEventListener('click', function(){
-            printElem('labelable');
-        });
-
-    function printElem(elem)
-    {
-        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-        mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write('<h3>' + document.title  + '</h3>');
-        mywindow.document.write(document.getElementById(elem).innerHTML);
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
-
-        mywindow.print();
-        mywindow.close();
-
-        return true;
-    }
-</script>    
-@endsections

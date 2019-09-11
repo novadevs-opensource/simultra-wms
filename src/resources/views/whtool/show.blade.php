@@ -116,42 +116,24 @@
 
 @section('content')
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <div class="ibox">
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-3">
                         <img width="100%" src="https://www.hyster.com/assets/0/72/74/87/137/139/29819197-d8c7-4702-8822-985ea321b095.png?n=2267" alt="">
                     </div>
+                    <div class="col-3">
+                        <h3>
+                            {{$o->name}}
+                        </h3>
+                    </div>
+                    <div class="col-3">
+                        <h3>
+                            {{$o->identifier}}
+                        </h3>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="ibox">
-            <div class="ibox-content">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>{{__('Name of the tool')}}</th>
-                            <th>{{__('Identifier')}}</th>
-                            <th>{{__('Documentation')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{$o->name}}</td>
-                            <td>{{$o->identifier}}</td>
-                            <td>
-                                <a href="#" class="btn btn-xs btn-primary">
-                                    <i class="fa fa-eye">
-
-                                    </i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

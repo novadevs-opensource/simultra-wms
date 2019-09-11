@@ -65,6 +65,8 @@ class BaseServiceProvider extends ServiceProvider
         // Publishing commands
         $this->loadCommands();
 
+        $this->loadFiles();
+
         $this->registerHelpers();
 
         $this->registerMiddlewares();
@@ -79,6 +81,22 @@ class BaseServiceProvider extends ServiceProvider
     public function loadCommands()
     {
         $this->commands('Novadevs\Simultra\Base\Commands\InstallModule');
+    }
+
+    /**
+     * Load Simultra documentation files.
+     *
+     * @return void
+     */
+    public function loadFiles()
+    {
+        $this->publishes([
+            __DIR__.'/resources/assets/docs' => public_path('vendor/novadevs/simultra/docs'),
+        ], 'simultra-base-docs');
+
+        $this->publishes([
+            __DIR__.'/resources/assets/img/whtools-simultra' => public_path('vendor/novadevs/simultra/whtools-simultra'),
+        ], 'simultra-base-imgs');
     }
 
     /**

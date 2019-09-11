@@ -148,7 +148,7 @@
                                         {{__('Warehouse')}}
                                     </b>
                                 </td>
-                                <td>{{$o->wh->name}}</td>
+                                <td>{{$o->warehouse}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -156,4 +156,5 @@
             </div>
         </div>
     </div>
+    {{dump($o)}}
 @endsection

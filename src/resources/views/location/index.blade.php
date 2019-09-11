@@ -135,7 +135,6 @@
                                 <th>{{__('Location name')}}</th>
                                 <th>{{__('Location barcode')}}</th>
                                 <th>{{__('Location address')}}</th>
-                                <th>{{__('Warehouse')}}</th>
                                 <th>{{__('Status')}}</th>
                                 <th>{{__('Actions')}}</th>
                             </tr>
@@ -143,19 +142,12 @@
                         <tbody>
                             @foreach ($loc->sortBy('location_barcode') as $i)
                                 <tr>
-                                    <td>
-                                        {{$i->name}}
-                                    </td>
+                                    <td>{{$i->name}}</td>
                                     <td>{{$i->location_barcode}}</td>
                                     <td>
                                         <span class="badge">{{__('corridor')}} {{$i->localization_x}}</span>
                                         <span class="badge badge-success">{{__('shelf')}} {{$i->localization_y}}</span> 
                                         <span class="badge badge-warning">{{__('height')}} {{$i->localization_z}}</span>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('warehouse.show', $i->warehouse->id)}}">
-                                            {{$i->warehouse->shortname}}
-                                        </a>
                                     </td>
                                     <td>
                                         @if ($i->status == 0)

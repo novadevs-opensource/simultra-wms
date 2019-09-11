@@ -21,28 +21,33 @@ class WarehouseController extends Controller
         $r = array();
         $d = array();
 
-        foreach ($o as $i) {
-            if ($i->sourceLocation->location_type == 1 && $i->status == 0) {
-                array_push($r, $i);
+        if ( count($o) > 0 ) {
+            foreach ($o as $i) {
+                if ($i->sourceLocation->location_type == 1 && $i->status == 0) {
+                    array_push($r, $i);
+                }
+                if ($i->sourceLocation->location_type == 3  && $i->status == 0) {
+                    array_push($d, $i);
+                }
             }
-            if ($i->sourceLocation->location_type == 3  && $i->status == 0) {
-                array_push($d, $i);
+    
+            $totalReceipts = 0;
+            $totalDelivers = 0;
+    
+            foreach ($r as $i) {
+                $totalReceipts = $totalReceipts + $i->qty;
             }
+    
+            foreach ($d as $i) {
+                $totalDelivers = $totalDelivers + $i->qty;
+            }
+    
+            return view('warehouse.home')->with('r', $totalReceipts)
+                                         ->with('d', $totalDelivers);
+        } else {
+            $whs = Warehouse::all();
+            return view('warehouse.index')->with('whs', $whs);
         }
-
-        $totalReceipts = 0;
-        $totalDelivers = 0;
-
-        foreach ($r as $i) {
-            $totalReceipts = $totalReceipts + $i->qty;
-        }
-
-        foreach ($d as $i) {
-            $totalDelivers = $totalDelivers + $i->qty;
-        }
-
-        return view('warehouse.home')->with('r', $totalReceipts)
-                                     ->with('d', $totalDelivers);
     }
 
     /**
