@@ -18,9 +18,7 @@ class ReportController extends Controller
     public function index()
     {
         $o = Report::all();
-        
         $t = new Report();
-        $t->_record('Entrando a setup');
 
         return view('report.index')->with('o', $o);
     }
@@ -30,7 +28,7 @@ class ReportController extends Controller
         $o = new Record();
     }
 
-    public function show(Report $report)
+    public function show(Request $request, Report $report)
     {
         $o = Report::find($report->id);
         return view('report.show')->with('o', $o);

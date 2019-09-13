@@ -44,7 +44,6 @@
 @endsection
 
 @section('content')
-{{saveReport('Entrando desde la vista', 10)}}
 <div class="container">
     <div class="row">
         <div class="col-12">

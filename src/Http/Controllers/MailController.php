@@ -16,7 +16,7 @@ class MailController extends Controller
      */
     public function index()
     {
-        $o = Mail::getInbox();
+        $o = Mail::getInbox();        
         return view('mail.inbox')->with('o', $o);
     }
 
@@ -52,11 +52,22 @@ class MailController extends Controller
      * @param  \App\Mail  $products
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show(Request $request, $id)
+    {   
         $o = Mail::find($id);
         $o->is_read = 1;
         $o->save();
+
+        // Practice reporting
+        switch ($o->subject) {
+            case '[P.1] New products':
+                saveReport('[P.1.1]', '1', 'Accessing to the email', checkMode($request), 4);
+                break;
+            
+            default:
+                # code...
+                break;
+        }
 
         return view('mail.show')->with('o', $o);
     }

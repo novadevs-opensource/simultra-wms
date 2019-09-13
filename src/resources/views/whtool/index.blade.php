@@ -169,7 +169,6 @@
                                 <th></th>
                                 <th>{{__('Name')}}</th>
                                 <th>{{__('Identifier')}}</th>
-                                {{-- <th>{{__('WH Tool')}}</th> --}}
                                 <th>{{__('User')}}</th>
                                 <th>{{__('Is in use')}}</th>
                                 <th id="step4-1">{{__('Actions')}}</th>
@@ -182,10 +181,15 @@
                                 @else
                                 <tr>
                                 @endif
-                                    <td><img src="https://www.hyster.com/assets/0/72/74/87/137/139/29819197-d8c7-4702-8822-985ea321b095.png?n=2267" alt="forklift" width="50" style="margin: -1em auto;"></td>
+                                    <td>
+                                        @if ($i->image != null)
+                                            <img height="40" src="{{url('storage/'.$i->image)}}" alt="">
+                                        @else
+                                            <img height="40" src="{{asset('vendor/novadevs/simultra/whtools-simultra/forklift.png')}}" alt="">                            
+                                        @endif
+                                    </td>
                                     <td>{{$i->name}}</td>
                                     <td>{{$i->identifier}}</td>
-                                    {{-- <td>{{$i->type}}</td> --}}
                                     <td>@if ($i->in_use){{$i->user->name}}@endif</td>
                                     <td>@if ($i->in_use)
                                         Yes

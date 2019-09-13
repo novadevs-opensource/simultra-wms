@@ -102,10 +102,10 @@ if (! function_exists('saveReport') ) {
      * 
      * @return void
      */
-    function saveReport($s, $mode = null)
+    function saveReport($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null)
     {   
         $t = new Novadevs\Simultra\Base\Models\Report();
-        $t->_record($s, $mode);
+        $t->_record($action, $points, $desc, $mode, $numberOfRecords);
     }
 }
 

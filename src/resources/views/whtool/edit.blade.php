@@ -139,7 +139,7 @@
         <div class="col-12">
             <div class="ibox">
                 <div class="ibox-content">
-                    <form  role="form" method="POST" action="{{route('whtool.update', $o->id)}}">
+                    <form  role="form" method="POST" action="{{route('whtool.update', $o->id)}}" enctype="multipart/form-data">
                         @method('PUT')
                         {{ csrf_field() }}
                         <div class="form-group row">
@@ -191,6 +191,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+							<div class=" col-2 col-form-label">{{ __('Image') }}</div>
+							<div class="col-1">
+                                @if ($o->image != null)
+								    <img src="{{asset('/storage/'. $o->image)}}" alt="{{__('Tool image')}}" height="35" class="pull-left">                                    
+                                @endif
+							</div>
+							<div class="col-3">
+								<div class="custom-file">
+									<input id="image" type="file" class="custom-file-input" name="image">
+                                    <label for="image" class="custom-file-label">{{ __('Choose file')}}...</label>
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+								</div>
+							</div>
+						</div>
 
                         <div class="hr-line-dashed"></div>
 

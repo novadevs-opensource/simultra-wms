@@ -54,14 +54,15 @@
                     </h3>
                 </div>
                 <div class="ibox-content">
+                    @dump(json_decode($o->data))
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>{{__('#')}}</th>
                                 <th>{{__('Date')}}</th>
-                                <th>{{__('Action')}}</th>
+                                <th>{{__('Practice')}}</th>                                
                                 <th>{{__('Score')}}</th>
-                                <th>{{__('Practice')}}</th>
+                                <th>{{__('Action')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +84,7 @@
                                     {{$i->points}}
                                 </td>
                                 <td>
-                                    {{$i->category}}
+                                    {{$i->description}}
                                 </td>
                             </tr>
                             @endforeach

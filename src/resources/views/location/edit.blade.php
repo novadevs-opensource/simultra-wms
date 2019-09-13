@@ -175,18 +175,24 @@
                                         </select>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="active"><b>{{ __('Is active?') }}</b></label>
-                                    <div class="i-checks">
-                                        <label class=""> 
-                                            <div class="icheckbox_square-green checked" style="position: relative;">
-                                                <input type="checkbox" value="" checked="" style="position: absolute; opacity: 0;">
-                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                            </div> 
-                                            <i></i> Option two checked
-                                        </label>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="warehouse_fk"><b>{{ __('Warehouse') }}</b></label>
+                                    <div class="col-8">
+                                        <select name="warehouse_fk" id="warehouse_fk" class="form-control">
+                                            @foreach ($w as $i)
+                                                @if ($i->id == $loc->warehouse_fk)
+                                                    <option value="{{$i->id}}" selected="selected">
+                                                        {{$i->name}}
+                                                    </option>
+                                                @else
+                                                    <option value="{{$i->id}}">
+                                                        {{$i->name}}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-12 col-form-label" for="active"><b>{{ __('Is active?') }}</b>
                                         <input type="checkbox" name="active" id="active" checked="" class="">                                        

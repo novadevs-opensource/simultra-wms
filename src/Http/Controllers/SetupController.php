@@ -10,6 +10,7 @@ use Cookie;
 use Illuminate\Http\Request;
 
 use Novadevs\Simultra\Base\Models\BaseCompany;
+use Novadevs\Simultra\Base\Models\Report;
 use Novadevs\Simultra\Base\Database\Seeds\BaseSeeder;
 
 class SetupController extends Controller
@@ -60,7 +61,7 @@ class SetupController extends Controller
     }
 
     /**
-     * Change mode status, can be 1 ("demo") or 2 ("request")
+     * Change mode status, can be 1 ("demo") or 2 ("quest")
      *
      * @param Request $request['mode'] 1 | 2
      * @return void
@@ -75,11 +76,12 @@ class SetupController extends Controller
             }
 
             if ( $request->route('mode') == 2 ) {
-                saveReport(__('Quest started'), true);
+                Report::_new();
+                saveReport('START', false, 'Quest started', checkMode($request), 1);
             }
 
             if ( $request->route('mode') == 1 ) {
-                saveReport(__('Quest finished'));
+                saveReport('END', false, 'Quest finished', checkMode($request), 1);
             }
         }
         return redirect()->back()->cookie($cookie);

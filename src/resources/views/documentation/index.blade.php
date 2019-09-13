@@ -123,6 +123,14 @@
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat asperiores ut fuga quo maiores ex excepturi? Reprehenderit voluptatum molestiae fugiat debitis sed porro dignissimos dolor. Ipsum molestias dolore sunt sed?
                         </p>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ asset('vendor/novadevs/simultra/docs/es/warehouse_guide_es.pdf') }}" target="blank">
+                                    <i class="fa fa-download"></i>
+                                    <span>{{__('Safety guide in storage processes and cargo handling')}}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
