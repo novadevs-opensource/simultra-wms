@@ -204,7 +204,6 @@
                                         </td>
                                         <td>
                                             {{$i->internal_reference}}
-                                            @dump($i->locations)
                                         </td>
                                     </tr>
                                     @endforeach

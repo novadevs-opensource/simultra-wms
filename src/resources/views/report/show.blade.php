@@ -54,7 +54,6 @@
                     </h3>
                 </div>
                 <div class="ibox-content">
-                    @dump(json_decode($o->data))
                     <table class="table">
                         <thead>
                             <tr>
