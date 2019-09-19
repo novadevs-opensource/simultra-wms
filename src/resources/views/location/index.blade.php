@@ -136,7 +136,7 @@
                                 <th>{{__('Location barcode')}}</th>
                                 <th>{{__('Location address')}}</th>
                                 <th>{{__('Warehouse')}}</th>
-                                <th>{{__('Status')}}</th>
+                                {{-- <th>{{__('Status')}}</th> --}}
                                 <th>{{__('Actions')}}</th>
                             </tr>
                         </thead>
@@ -157,13 +157,13 @@
                                             {{$i->warehouse->shortname}}
                                         </a>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         @if ($i->status == 0)
                                             Empty
                                         @else
                                             Full
                                         @endif
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         <form action="{{route('location.destroy', $i->id)}}" method="POST">
                                             {{ method_field('DELETE') }}

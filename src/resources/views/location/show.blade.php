@@ -137,13 +137,9 @@
                                             <b>{{__('Is a part of')}}</b>
                                         </td>
                                         <td>
-                                            @if ( $loc->parentLocation() )
-                                                <a href="{{route('location.show', $loc->parentLocation()->id)}}" class="btn btn-primary btn-xs">
-                                                    {{$loc->parentLocation()->name}}
-                                                </a>
-                                            @else
-                                                --
-                                            @endif
+                                            <a href="{{route('warehouse.show', $loc->warehouse->id)}}">
+                                                {{$loc->warehouse->shortname}}
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -151,7 +147,18 @@
                                             <b>{{__('Location type')}}</b>
                                         </td>
                                         <td>
-                                            {{$loc->location_type}}
+                                            @switch($loc->location_category)
+                                                @case(1)
+                                                    {{__('Conventional')}}
+                                                    @break
+                                                @case(2)
+                                                    {{__('Cantilever')}}
+                                                    @break
+                                                @case(3)
+                                                    {{__('Gravity')}}
+                                                @default
+                                                    @break
+                                            @endswitch
                                         </td>
                                     </tr>
                                     <tr>

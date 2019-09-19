@@ -38,11 +38,13 @@
             @endif
         </ul>
     </li>
+    @if ( checkRole(Auth()->user()->role, 'ADMIN') )
     <li class="{{isActiveRoute('reports')}}">
-        <a href="{{route('report')}}">
+        <a href="{{route('report.index')}}">
             {{__('Reports')}}
         </a>
     </li>
+    @endif
 @endsection
 
 @section('content')

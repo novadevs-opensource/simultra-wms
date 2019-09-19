@@ -15,7 +15,7 @@ class BaseSeeder extends Seeder
     public function run()
     {
         //path to sql file
-        $sql = base_path('simultra-wms.sql');
+        $sql = base_path('vendor/novadevs-opensource/simultra-wms/src/Database/seeds/defaults.sql');
 
         //collect contents and pass to DB::unprepared
         DB::unprepared(file_get_contents($sql));

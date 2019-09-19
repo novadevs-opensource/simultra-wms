@@ -186,7 +186,7 @@
                                     <div class="col-9">
                                         <select name="product" id="product" class="form-control @error('product') is-invalid @enderror">
                                             @foreach ($p as $i)
-                                                <option value="{{$i->id}}">{{$i->name}}</option>
+                                                <option value="{{$i->id}}">{{$i->internal_reference}}</option>
                                             @endforeach
                                         </select>
                                         @error('product')

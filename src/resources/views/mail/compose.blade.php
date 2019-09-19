@@ -15,7 +15,7 @@
     <a href="{{route('messaging.index')}}">{{__('Messaging')}}</a>
 </li>
 <li class="breadcrumb-item active">
-    <a href="{{route('messaging.create')}}">{{__('Compose mail')}}</a>
+    <a href="{{route('messaging.create', ['action'=>'new'] )}}">{{__('Compose mail')}}</a>
 </li>
 @endsection
 
@@ -51,7 +51,7 @@
 		<div class="ibox ">
 			<div class="ibox-content mailbox-content">
 				<div class="file-manager">
-					<a class="btn btn-block btn-primary compose-mail" href="{{route('messaging.create')}}">Compose Mail</a>
+					<a class="btn btn-block btn-primary compose-mail" href="{{route('messaging.create', ['action'=>'new'])}}">Compose Mail</a>
 					<div class="space-25"></div>
 					<h5>Folders</h5>
 					<ul class="folder-list m-b-md" style="padding: 0">
@@ -94,13 +94,13 @@
 					<div class="form-group row">
                         <label class="col-sm-2 col-form-label">To:</label>
 						<div class="col-sm-10">
-                            <input type="text" class="form-control" name="to" value="alex.smith@corporat.com">
+                            <input type="text" class="form-control" name="to" value="@if(isset($o)){{$o->from}}@endif">
                         </div>
 					</div>
 					<div class="form-group row">
                         <label class="col-sm-2 col-form-label">Subject:</label>
 						<div class="col-sm-10">
-                            <input type="text" class="form-control" value="" name="subject">
+                            <input type="text" class="form-control" value="@if (isset($o)){{$a}} {{$o->subject}}@endif" name="subject">
                         </div>
 					</div>
 					<input type="hidden" name="from" value="{{Auth::user()->email}}">
@@ -239,10 +239,33 @@
                         {{-- USE NOT KNOWN --}}
                         {{-- <textarea class="note-codable" role="textbox" aria-multiline="true" name="body"></textarea> --}}
 						<div class="note-editable card-block" contenteditable="true" role="textbox" aria-multiline="true" id="fake-body">
-							<h3>Hello Jonathan! </h3>
-							dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-							<br>
-							<br>
+							@if (isset($o) && $a == 'Re:') 
+								<br>
+								<br>
+								<hr class="background-red">
+								<b>{{__('On')}} {{$o->created_at}}, {{$o->from}} {{__('wrote')}}:</b> <br>
+								{!!$o->body!!}
+								<br>
+							@elseif(isset($o) && $a == 'Fwd:')
+								<br>
+								<br>
+								<b>{{'--------------'}} {{__('Forwarded message')}} {{'--------------'}}</b> <br>
+								<b>{{__('From:')}}</b> {{$o->from}}<br>
+								<b>{{__('To:')}}</b> {{$o->to}}<br>
+								<b>{{__('Subject:')}}</b> {{$o->subject}}<br>
+								<b>{{__('Body:')}}</b> {!!$o->body!!}
+								<br>
+							@else
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+							@endif
+							
 
 						</div>
                     </div>

@@ -131,7 +131,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label" for="partner"><b>{{ __('Partner') }}</b></label>
                                     <div class="col-9">
-                                        <select name="partner" id="partner" class="form-control @error('partner') is-invalid @enderror">
+                                        <select name="partner" id="partner" class="form-control @error('partner') is-invalid @enderror" disabled>
                                             @foreach ($pa as $i)
                                                 @if ($i->id == $o->partner)
                                                     <option value="{{$i->id}}" selected>{{$i->name}}</option>
@@ -150,7 +150,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label" for="reference"><b>{{ __('Transfer reference') }}</b></label>
                                     <div class="col-9">
-                                        <input type="text" name="reference" id="reference" class="form-control @error('partner') is-invalid @enderror" value="{{$o->reference}}">
+                                        <input type="text" name="reference" id="reference" class="form-control @error('partner') is-invalid @enderror" value="{{$o->reference}}" disabled>
                                         @error('reference')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -163,14 +163,14 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label" for="scheduled_date"><b>{{ __('Scheduled date') }}</b></label>
                                     <div class="col-8">
-                                        <input type="date" name="scheduled_date" id="scheduled_date" class="form-control" value="{{$o->scheduled_date}}">
+                                        <input type="date" name="scheduled_date" id="scheduled_date" class="form-control" value="{{$o->scheduled_date}}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class=" col-4 col-form-label"><b>{{ __('Source document') }}</b></div>
                                     <div class="col-8">
                                         <div class="custom-file">
-                                            <input id="source_file" type="file" class="custom-file-input" name="source_document">
+                                            <input id="source_file" type="file" class="custom-file-input" name="source_document" disabled>
                                             <label for="source_file" class="custom-file-label">{{ __('Choose file')}}...</label>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
                                 <div class="form-group row">
                                     <label for="product" class="col-3 col-form-label">{{__('Product')}}</label>
                                     <div class="col-9">
-                                        <select name="product" id="product" class="form-control @error('partner') is-invalid @enderror">
+                                        <select name="product" id="product" class="form-control @error('partner') is-invalid @enderror" disabled>
                                             @foreach ($p as $i)
                                                 @if ($i->id == $o->product)
                                                 <option value="{{$i->id}}" selected>{{$i->name}}</option>
@@ -226,7 +226,7 @@
                                         <h3>{{__('Locations')}}</h3>
                                     </div>
                                 </div>
-
+                                @if ($o->destinationLocation->location_type == 1)
                                 <div class="form-group row">
                                         <label for="source_location" class="col-4 col-form-label">{{__('Source location')}}</label>
                                         <div class="col-8">
@@ -241,6 +241,8 @@
                                             </select>
                                         </div>
                                 </div>
+                                @endif
+                                @if ($o->destinationLocation->location_type != 1)
                                 <div class="form-group row">
                                         <label for="destination_location" class="col-4 col-form-label">{{__('Destination location')}}</label>
                                         <div class="col-8">
@@ -255,6 +257,7 @@
                                             </select>
                                         </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
 

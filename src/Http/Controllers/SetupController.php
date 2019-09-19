@@ -46,18 +46,23 @@ class SetupController extends Controller
     /**
      * Restores default database
      *
+     * @param object $request
      * @return void
      */
-    public function resetDefault()
+    public function resetDefault(Request $request)
     {
         $s = new BaseSeeder();
 
         try {
             $s->run(); 
-            return redirect()->back();
+            $request->session()->flash('message', __('Datos restaurados satisfactoriamente')); 
+            $request->session()->flash('alert-class', 'alert-success');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            $request->session()->flash('message', '<strong>Error!</strong> ' . $e->getMessage()); 
+            $request->session()->flash('alert-class', 'alert-danger');
         }
+
+        return redirect()->back();
     }
 
     /**

@@ -96,16 +96,20 @@ if (! function_exists('saveReport') ) {
      * Undocumented function
      * 
      * @uses Report::_record $t->_record()
-     * 
-     * @param string $s
-     * @param boolean $mode
+     *
+     * @param string $action - Practice´s identificator
+     * @param string $points - Score set to this practice
+     * @param string $desc - Description of the task
+     * @param bool $mode - Quest mode or not
+     * @param int $numberOfRecords - Number of times that record can be stored
+     * @param object $additional - Eloquent object
      * 
      * @return void
      */
-    function saveReport($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null)
+    function saveReport($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null, $additional = null)
     {   
         $t = new Novadevs\Simultra\Base\Models\Report();
-        $t->_record($action, $points, $desc, $mode, $numberOfRecords);
+        $t->_record($action, $points, $desc, $mode, $numberOfRecords, $additional);
     }
 }
 

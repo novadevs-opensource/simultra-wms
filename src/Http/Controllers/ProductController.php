@@ -41,19 +41,28 @@ class ProductController extends Controller
     {
         $this->validate($request,
             [ 
-                'name' => 'required',
-                'price' => 'required:numeric',
-                'qty_forecasted' => 'required:numeric',
+                'name'                  => 'required',
+                'price'                 => 'required|numeric',
+                'ean13'                 => 'required|numeric|digits:13',
+                'internal_reference'    => 'required',
+                'qty_forecasted'        => 'required|numeric|min:1|max:99999',
+                'date_of_expiry'        => 'required_if:perishable,on'
             ]
         );
 
         try {
             $o = new Product($request->all());
+            $o->qty_on_hand = 0;
             // Active/Inactive checkbox validation
+            ($request->perishable == 'on') ? $o->perishable = true : $o->perishable = false;
             ($request->active == 'on') ? $o->active = true : $o->active = false;
             ($request->for_sale == 'on') ? $o->for_sale = true : $o->for_sale = false;
 
             $o->save();
+
+            //Saving report
+            saveReport('[P.1.2]', '2', __('Creating product'), checkMode($request), 3, $o);
+
             // Generating flash message
             $request->session()->flash('message', 'Registro creado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-success'); 
@@ -199,5 +208,28 @@ class ProductController extends Controller
         }
 
         return $result;
+    }
+
+    /**
+     * This function is just an AJAX request listener used by the reporting system.
+     *
+     * @param int $p
+     * @return string
+     */
+    public function _productLabelReport($p) {
+        $o = Product::find($p);
+        switch ($o->id) {
+            case 1:
+                saveReport('[P.1.3]', '1', __('Printing label for product ' . $o->name . '.'), null, 3);
+                break;
+            
+            case 5:
+                saveReport('[P.5.3]', '2', __('Printing label for product ' . $o->name . '.'), null, 3);
+
+            default:
+                break;
+        }
+        
+        return json_encode($o->name);
     }
 }

@@ -100,12 +100,19 @@ class WhToolController extends Controller
             [ 
                 'name'=>'required',
                 'identifier' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]
         );
 
         try {
             WhTool::find($whtool->id)->update($this->handleRequest($request));
+
+            //Report
+            if ($whtool->in_use == 0) {
+                saveReport('[P.Multiple]', '2', 'Using ' . $whtool->name, checkMode($request), 4, null);
+            } else {
+                saveReport('[P.Multiple]', '2', 'Leaving ' . $whtool->name, checkMode($request), 4, null);
+            }
 
             // Generating flash message
             $request->session()->flash('message', 'Registro actualizado satisfactoriamente'); 

@@ -82,6 +82,9 @@ class WarehouseController extends Controller
         try {
             $bc = new Warehouse($request->all());
             $bc->save();
+        
+            saveReport('[P.3.1]', '3', __('Creating warehouse ' . $bc->name . '.'), null, 1);
+
             // Generating flash message
             $request->session()->flash('message', 'Registro creado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-success'); 

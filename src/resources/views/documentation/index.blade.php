@@ -130,6 +130,12 @@
                                     <span>{{__('Safety guide in storage processes and cargo handling')}}</span>
                                 </a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="{{ asset('vendor/novadevs/simultra/docs/es/inventory_model_p7_es.pdf') }}" target="blank">
+                                    <i class="fa fa-download"></i>
+                                    <span>{{__('Inventory model')}}</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

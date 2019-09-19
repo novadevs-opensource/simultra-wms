@@ -18,8 +18,8 @@ Route::group(['middleware' => ['web', 'auth']], function(){
     Route::get('setup/quest/{mode}', '\Novadevs\Simultra\Base\Http\Controllers\SetupController@quest')->name('quest');
     Route::get('setup/default', '\Novadevs\Simultra\Base\Http\Controllers\SetupController@resetDefault')->name('default');
 
-    Route::get('reports', '\Novadevs\Simultra\Base\Http\Controllers\ReportController@index')->name('report');
-    Route::get('reports/{report}', '\Novadevs\Simultra\Base\Http\Controllers\ReportController@show')->name('report.show');
+    // Route::get('reports', '\Novadevs\Simultra\Base\Http\Controllers\ReportController@index')->name('report');
+    // Route::get('reports/{report}', '\Novadevs\Simultra\Base\Http\Controllers\ReportController@show')->name('report.show');
 
  
     Route::get('/setup/modules', '\Novadevs\Simultra\Base\Http\Controllers\ModulesController@index')->name('setup.modules');
@@ -45,8 +45,10 @@ Route::group(['middleware' => ['web', 'auth']], function(){
     
     // Product
     Route::resource('product', '\Novadevs\Simultra\Base\Http\Controllers\ProductController');
-    //AJAX
+
+    // AJAX
     Route::get('product-location/{product_id}', '\Novadevs\Simultra\Base\Http\Controllers\StockMoveController@_productLocations')->name('product-location');
+    Route::get('product-label-report/{product_id}', '\Novadevs\Simultra\Base\Http\Controllers\ProductController@_productLabelReport')->name('product-label-report');
 
     // Location
     Route::resource('location', '\Novadevs\Simultra\Base\Http\Controllers\LocationController');
@@ -66,6 +68,8 @@ Route::group(['middleware' => ['web', 'auth']], function(){
     // Documents
     Route::get('documentation', '\Novadevs\Simultra\Base\Http\Controllers\DocumentationController@index')->name('documentation');
 
+    // Reports
+    Route::resource('report', '\Novadevs\Simultra\Base\Http\Controllers\ReportController');
 });
 
 ?>

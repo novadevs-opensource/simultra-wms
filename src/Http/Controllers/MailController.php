@@ -25,9 +25,31 @@ class MailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('mail.compose');
+        switch ($request->get('action')) {
+            case 'new':
+                return view('mail.compose')->with('o', null)
+                                            ->with('a', $request->get('action'));
+                break;
+
+            case 'reply':
+                $o = Mail::find($request->get('mail'));
+                return view('mail.compose')->with('o', $o)
+                                            ->with('a', 'Re:');
+                break;
+
+            case 'forward':
+                $o = Mail::find($request->get('mail'));
+                return view('mail.compose')->with('o', $o)
+                                            ->with('a', 'Fwd:');
+                break;
+
+            default:
+                break;
+        }
+        $o = Mail::find($request->get('mail'));
+        return view('mail.compose')->with('o', $o);
     }
 
     /**
@@ -40,6 +62,37 @@ class MailController extends Controller
     {
         $n = new Mail($request->all());
         $n->save();
+
+         // Practice reporting
+         switch ($n->subject) {
+            case 'Re: [P.1] New products':
+                $o = (object) $n->toArray();
+                saveReport('[P.1.4]', '2', 'Responding to the email', checkMode($request), 1, $o);
+                break;
+
+            case 'Re: [P.3] New warehouse':
+                $o = (object) $n->toArray();
+                saveReport('[P.3.5]', '2', 'Responding to the email', checkMode($request), 1, $o);
+                break;
+
+            case 'Re: [P.4] New stock move':
+                $o = (object) $n->toArray();
+                saveReport('[P.4.6]', '2', 'Responding to the email', checkMode($request), 1, $o);
+                break;
+            
+            case 'Re: [P.5] Stock break!':
+                $o = (object) $n->toArray();
+                saveReport('[P.5.6]', '2', 'Responding to the email', checkMode($request), 1, $o);
+                break;
+
+            case 'Re: [P.6] New order':
+                $o = (object) $n->toArray();
+                saveReport('[P.6.6]', '2', 'Responding to the email', checkMode($request), 1, $o);
+                break;
+            
+            default:
+                break;
+        }
 
         $o = Mail::all();
         return redirect(route('messaging.index'));
@@ -61,9 +114,25 @@ class MailController extends Controller
         // Practice reporting
         switch ($o->subject) {
             case '[P.1] New products':
-                saveReport('[P.1.1]', '1', 'Accessing to the email', checkMode($request), 4);
+                saveReport('[P.1.1]', '1', 'Accessing to the email', checkMode($request), 1);
                 break;
-            
+
+            case '[P.2] New receipt':
+                saveReport('[P.2.1]', '1', 'Accessing to the email', checkMode($request), 1);
+                break;
+
+            case '[P.4] New stock move':
+                saveReport('[P.4.1]', '1', 'Accessing to the email', checkMode($request), 1);
+                break;
+
+            case '[P.5] Stock break!':
+                saveReport('[P.5.1]', '2', 'Accessing to the email', checkMode($request), 1);
+                break;
+
+            case '[P.6] New order':
+                saveReport('[P.5.1]', '2', 'Accessing to the email', checkMode($request), 1);
+                break;
+
             default:
                 # code...
                 break;

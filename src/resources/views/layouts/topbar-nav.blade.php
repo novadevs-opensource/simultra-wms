@@ -6,6 +6,10 @@
                     <i class="fa fa-stop"></i>
                     {{__('Finish exam mode')}}
                 </a>
+                <button type="button" class="btn btn-primary pull-left minimalize-styl-2" data-toggle="modal" data-target="#myModal6">
+                    <i class="fa fa-check"></i>
+                    {{__('Your progress')}}
+                </button>
                 @else
                 <a href="{{route('quest', 2)}}" class="btn btn-primary pull-left minimalize-styl-2" id="runExam">
                     <i class="fa fa-play"></i>

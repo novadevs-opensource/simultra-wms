@@ -56,6 +56,10 @@ class LocationController extends Controller
             // Active/Inactive checkbox validation
             ($request->active == 'on') ? $loc->active = true : $loc->active = false;
             $loc->save();
+
+            // Reporting
+            saveReport('[P.3.2]', '9', __('Creating location ' . $loc->name . '.'), null, 4, $loc);
+
             // Generating flash message
             $request->session()->flash('message', 'Registro creado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-success'); 

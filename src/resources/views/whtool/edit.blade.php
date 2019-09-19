@@ -196,7 +196,24 @@
 							<div class=" col-2 col-form-label">{{ __('Image') }}</div>
 							<div class="col-1">
                                 @if ($o->image != null)
-								    <img src="{{asset('/storage/'. $o->image)}}" alt="{{__('Tool image')}}" height="35" class="pull-left">                                    
+                                    <img src="{{asset($o->image)}}" alt="{{__('Tool image')}}" height="35" class="pull-left">    
+                                @else
+                                    @switch($o->identifier) 
+                                        @case('RE001')
+                                            <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/forklift.png')}}" alt="">
+                                            @break
+                                        @case('RE002')
+                                            <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
+                                            @break
+                                        @case('RE003')
+                                            <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
+                                            @break
+                                        @case('RE004')
+                                            <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/handcart.png')}}" alt="">
+                                            @break
+                                        @default
+                                            @break
+                                    @endswitch                                
                                 @endif
 							</div>
 							<div class="col-3">

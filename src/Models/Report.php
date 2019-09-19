@@ -38,13 +38,17 @@ class Report extends Model
     /**
      * If a report exists for the current user, is updated, else, is created. Usually fired by saveReport() helper
      * 
-     * @param string|array $action
-     * @param boolean $mode
+     * @param string $action - Practice´s identificator
+     * @param string $points - Score set to this practice
+     * @param string $desc - Description of the task
+     * @param bool $mode - Quest mode or not
+     * @param int $numberOfRecords - Number of times that record can be stored
+     * @param object $additional - Eloquent object
      * 
      * @throws Exception 404
      * @return void
      */
-    public function _record($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null)
+    public function _record($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null, $additional = null)
     {
         $u = Auth::user();
 
@@ -57,7 +61,7 @@ class Report extends Model
             $c->data = json_encode(array());
         }
 
-        $c->data = $this->_prepareRecord($action, $points, $desc, $c);
+        $c->data = $this->_prepareRecord($action, $points, $desc, $c, $additional);
 
         // Condition to write log (workaround to not repeat scores)
         $cond = $this->_alreadyRecorded( json_decode($c->data), $action, $numberOfRecords);
@@ -78,16 +82,23 @@ class Report extends Model
      *
      * @param array|object $action
      * @param object $c
+     * 
      * @return string JSON
      */
-    public function _prepareRecord($action = null, $points = null, $desc = null, $c)
+    public function _prepareRecord($action = null, $points = null, $desc = null, $c, $additional = null)
     {
+        $time = $this->_getLastTimeDiff($c->data, $c);
+
         $dataRecord = json_decode($c->data);
         $r = array(
             'time' => date('Y-m-d H:m:s'),
             'action' => $action,
             'points' => $points,
-            'description' => $desc,
+            'description' => array(
+                'desc' => $desc,
+                'additional' => $additional
+            ),
+            'date' => $time,
         );
         array_push($dataRecord , $r);
 
@@ -101,6 +112,7 @@ class Report extends Model
      * @param array $report
      * @param string $action
      * @param integer $numberOfRecords
+     * 
      * @return bool
      */
     public function _alreadyRecorded($report, $action, $numberOfRecords) {
@@ -134,6 +146,26 @@ class Report extends Model
                 }
             }
         }
+    }
+
+
+    public function _getLastTimeDiff($json, $report){
+        $data = json_decode($json);
+        if ( count($data) == 0) {
+            $date1 = new \DateTime("now");
+
+        } else {
+            $date1 = $report->updated_at;    
+        }
+        
+        $date2 = new \DateTime("now");
+
+        $diff = date_diff( 
+           date_create( $date1->format('Y-m-d H:i:s') ), 
+           date_create( $date2->format('Y-m-d H:i:s') ) 
+        );
+
+        return $diff->h . ':' . $diff->i . ':' . $diff->s;
     }
 
     /**

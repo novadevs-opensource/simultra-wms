@@ -130,7 +130,7 @@
                         <thead>
                             <tr>
                                 <th>{{__('Name')}}</th>
-                                <th>{{__('Internal category')}}</th>
+                                <th>{{__('Internal reference')}}</th>
                                 <th>{{__('Product type')}}</th>
                                 <th>{{__('Status')}}</th>
                                 <th>{{__('Quantity on hand')}}</th>
@@ -142,8 +142,14 @@
                             @foreach ($p as $i)
                                 <tr>
                                     <td>{{$i->name}}</td>
-                                    <td>...</td>
-                                    <td>{{$i->product_type}}</td>
+                                    <td>{{$i->internal_reference}}</td>
+                                    <td>
+                                        @if ($i->perishable == 1)
+                                            {{'Perishable'}}
+                                        @else
+                                            {{'Non perishable'}}
+                                        @endif
+                                    </td>
                                     <td>{{$i->status}}</td>
                                     <td 
                                     @if ($i->qty_on_hand < $i->qty_forecasted)

@@ -50,9 +50,8 @@ class Transfer extends Model
      *
      * @return void
      */
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class, 'product', 'id');
     }
-
 }

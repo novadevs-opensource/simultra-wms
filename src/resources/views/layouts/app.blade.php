@@ -57,9 +57,78 @@
             <main class="py-4">
                 @yield('content')
             </main>
-
         </div>
+    </div>
 
+    <div class="modal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <form action="">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{__('Your progress')}}</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{!!__('In order to check your results, please <b>mark each practice which you consider that is finished</b>.')!!}</p>
+                        <p>{!!__("Once a time you have mark a practice, the system will evaluate your results, <b>each practice that you don't mark it doesn't be scored.</b>")!!}</p>
+                        <div class="row form-group">
+                            <div class="col-12">
+                                @php
+                                    // The inbox is always a practices resume
+                                    $practices = Novadevs\Simultra\Base\Models\Mail::getInbox();
+                                    function startsWith ($string, $startString) 
+                                    { 
+                                        $len = strlen($startString); 
+                                        return (substr($string, 0, $len) === $startString); 
+                                    }
+                                @endphp
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                {{'Practice'}}
+                                            </th>
+                                            <th>
+                                                {{'Time used'}}
+                                            </th>
+                                            <th>
+                                                {{'Status'}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($practices as $i)
+                                        @if ( startsWith( $i->subject, '[P.') )
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox checkbox-info">
+                                                    <input style="height:1em;" type="checkbox" class="form-control" name="p{{$i->id}}" id="p{{$i->id}}" placeholder="0">
+                                                        <label for="p{{$i->id}}">
+                                                        <b>{{$i->subject}}</b>
+                                                    </label>
+                                                </div> 
+                                            </td>
+                                            <td>
+                                                <span id="time-p{{$i->id}}"></span>
+                                            </td>
+                                            <td>
+                                                <span id="status-p{{$i->id}}"></span>
+                                            </td>
+                                        </tr>
+                                        @endif                                    
+                                    @endforeach
+                                    </tbody>                                
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="{!! asset('vendor/novadevs/simultra/js/inspinia-theme.js') !!}" type="text/javascript"></script>

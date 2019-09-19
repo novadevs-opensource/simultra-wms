@@ -57,7 +57,7 @@
 		<div class="ibox ">
 			<div class="ibox-content mailbox-content">
 				<div class="file-manager">
-					<a id="step1-2-compose" class="btn btn-block btn-primary compose-mail" href="{{route('messaging.create')}}">Compose Mail</a>
+					<a id="step1-2-compose" class="btn btn-block btn-primary compose-mail" href="{{route('messaging.create', ['action'=>'new'] )}}">Compose Mail</a>
 					<div class="space-25"></div>
 					<h5>Folders</h5>
 					<ul class="folder-list m-b-md" style="padding: 0">
@@ -85,7 +85,7 @@
 	<div class="col-lg-9 animated fadeInRight">
 		<div class="mail-box-header">
 			<div class="float-right tooltip-demo">
-				<a href="{{route('messaging.create')}}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>
+				<a href="{{route('messaging.create', ['action'=>'reply', 'mail' => $o->id ])}}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>
 				{{-- <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email"><i class="fa fa-print"></i> </a> --}}
 				{{-- <a href="{{route('messaging.index')}}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a> --}}
 			</div>
@@ -117,10 +117,10 @@
 				</p>
 				<div class="attachment">
 					@foreach ( json_decode($o->attachments) as $i)
-					{{-- [{"name":"hola","date":"lo ke sea"},{"name":"adios","date":"na de na"}] --}}
+					{{-- [{"name":"delivery_note.pdf", "date":"2019-06-12 01:39:45", "url":"vendor/novadevs/simultra/docs/es/delivery_note_p1_es.pdf"}] --}}
 					<div class="file-box">
 						<div class="file">
-							<a href="#">
+							<a href="{{asset($i->url)}}" target="_blank">
 								<span class="corner"></span>
 
 								<div class="icon">
@@ -140,8 +140,8 @@
 			</div>
 			@endif					
 			<div class="mail-body text-right tooltip-demo">
-				<a class="btn btn-sm btn-white" href="{{route('messaging.create')}}"><i class="fa fa-reply"></i> Reply</a>
-				<a class="btn btn-sm btn-white" href="{{route('messaging.create')}}"><i class="fa fa-arrow-right"></i> Forward</a>
+				<a class="btn btn-sm btn-white" href="{{route('messaging.create', ['action'=>'reply', 'mail' => $o->id ])}}"><i class="fa fa-reply"></i> Reply</a>
+				<a class="btn btn-sm btn-white" href="{{route('messaging.create', ['action'=>'forward', 'mail' => $o->id ])}}"><i class="fa fa-arrow-right"></i> Forward</a>
 				{{-- <button title="" data-placement="top" data-toggle="tooltip" type="button" data-original-title="Print" class="btn btn-sm btn-white"><i class="fa fa-print"></i> Print</button> --}}
 				{{-- <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Remove</button> --}}
 			</div>

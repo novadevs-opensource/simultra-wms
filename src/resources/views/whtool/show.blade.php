@@ -122,24 +122,24 @@
                 <div class="row">
                     <div class="col-12">
                         @if ($o->image != null)
-                            <img width="100%" src="{{url('storage/'.$o->image)}}" alt="">
+                            <img width="100%" src="{{asset($o->image)}}" alt="">
                         @else
-                        @switch($o->identifier)
-                            @case('RE001')
-                                <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/forklift.png')}}" alt="">
-                                @break
-                            @case('RE002')
-                                <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
-                                @break
-                            @case('RE003')
-                                <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
-                                @break
-                            @case('RE004')
-                                <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/handcart.png')}}" alt="">
-                                @break
-                            @default
-                                @break
-                        @endswitch
+                            @switch($o->identifier) 
+                                @case('RE001')
+                                    <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/forklift.png')}}" alt="">
+                                    @break
+                                @case('RE002')
+                                    <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
+                                    @break
+                                @case('RE003')
+                                    <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/electricTrolley.png')}}" alt="">
+                                    @break
+                                @case('RE004')
+                                    <img width="100%" src="{{asset('vendor/novadevs/simultra/whtools-simultra/handcart.png')}}" alt="">
+                                    @break
+                                @default
+                                    @break
+                            @endswitch
                         @endif
                     </div>
                 </div>

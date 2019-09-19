@@ -49,16 +49,9 @@
         <div class="col-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <div class="row">
-                        <div class="col-9">
-                            <h3>
-                                {{$o->u->name}}{{__("'s report data")}}
-                            </h3>
-                        </div>
-                        <div class="col-3 pull-right">
-                            <a href="{{route('report.edit', $o->id)}}" class="btn btn-warning">{{__('Finish calification')}}</a>
-                        </div>
-                    </div>
+                    <h3>
+                        {{$o->u->name}}{{__("'s report data")}}
+                    </h3>
                 </div>
                 <div class="ibox-title">
                     <div class="row">
@@ -75,26 +68,29 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <table class="table">
-                        <thead>
+                    <form action="{{route('report.update', $o )}}" method="POST" role="form" id="edit-report">
+                        @csrf
+                        @method('PUT')
+                    <table class="table table-bordered table-responsive">
+                        <thead class="text-center">
                             <tr>
                                 <th>{{__('#')}}</th>
                                 <th>{{__('Date')}}</th>
                                 <th>{{__('Practice')}}</th>                                
                                 <th>{{__('Score')}}</th>
-                                <th>{{__('Action')}}</th>
-                                <th>{{__('Elapsed time')}}</th>
+                                <th class="uppercase">{{__('Data')}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
-                                $counter = 1;
+                                $counter = 0;
+                                $keys = array();
                                 $points = 0;
                             @endphp
                             @foreach (json_decode($o->data) as $i)
                             <tr>
                                 <td>
-                                    {{$counter++}}
+                                    {{$counter}}
                                 </td>
                                 <td>
                                     {{$i->time}}
@@ -103,23 +99,48 @@
                                     {{$i->action}}
                                 </td>
                                 <td>
+                                    @if ( isset($i->description->additional) )
+                                        <input class="form-control" type="number" name="points-{{$counter}}" id="pointspoints-{{$counter}}" value="{{$i->points}}" style="width:150px">
+                                    @else
                                     {{$i->points}}
+                                    @endif
                                 </td>
                                 <td>
-                                    {{$i->description->desc}}
-                                </td>
-                                <td>
-                                    @if (isset($i->date))
-                                        {{$i->date}}
+                                    @if ( isset($i->description->additional) )
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                @foreach ($i->description->additional as $k => $v)
+                                                    <th>{{$k}}</th>
+                                                @endforeach
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="table-danger">
+                                                @foreach ($i->description->additional as $k => $v)
+                                                    <td>{!! $v !!}</td> 
+                                                @endforeach
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     @endif
                                 </td>
                             </tr>
                             @php
+                                $counter++;
                                 $points = $points + (int)$i->points    
                             @endphp
                             @endforeach
                         </tbody>
                     </table>
+                    <input type="hidden" name="data" value="" id="data">
+                    <div class="row form-group">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">{{_('Save')}}</button>
+                            <a href="{{route('report.show', $o->id)}}" class="btn btn-danger">{{_('Cancel')}}</a>
+                        </div>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>

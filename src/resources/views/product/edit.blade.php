@@ -192,7 +192,7 @@
                         </div>
 
                         <div class="form-group row">
-							<div class="col-sm-3">
+							<div class="col-2">
                                 <div class="checkbox checkbox-info">
                                     <input type="checkbox" class="form-control" name="for_sale" id="for_sale" placeholder="0" @if ($o->for_sale == 1)checked="checked"@endif>
                                     <label for="for_sale">
@@ -200,11 +200,19 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="checkbox checkbox-info">
                                     <input type="checkbox" class="form-control" name="active" id="active" placeholder="0" @if ($o->is_active == 1)checked="checked"@endif>
                                     <label for="active">
                                             <b>{{ __('Is active?') }}</b>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="checkbox checkbox-info">
+                                    <input type="checkbox" class="form-control" name="perishable" id="perishable" placeholder="0" @if ($o->perishable == 1)checked="checked"@endif>>
+                                    <label for="perishable">
+                                            <b>{{ __('Is perishable?') }}</b>
                                     </label>
                                 </div>
                             </div>
@@ -248,6 +256,19 @@
                                     <div class="col-8">
                                         <input type="number" class="form-control  @error('qty_forecasted') is-invalid @enderror" name="qty_forecasted" id="qty_forecasted" value="{{ $o->qty_forecasted }}">
                                         @error('qty_forecasted')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label for="date_of_expiry" class="col-4 col-form-label"><b>{{__('Expiry date')}}</b></label>
+                                    <div class="col-8">
+                                        <input type="date" name="date_of_expiry" id="date_of_expiry" class="form-control @error('date_of_expiry') is-invalid @enderror">
+                                        @error('date_of_expiry')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

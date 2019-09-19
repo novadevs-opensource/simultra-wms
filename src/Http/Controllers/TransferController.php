@@ -57,7 +57,7 @@ class TransferController extends Controller
             [ 
                 'partner'=>'required',
                 'product' => 'required',
-                'reference' => 'required',
+                // 'reference' => 'required',
                 'qty' => 'required:integer',
             ]
         );
@@ -66,6 +66,13 @@ class TransferController extends Controller
             $o = new Transfer($this->handleRequest($request));
 
             $o->save();
+
+            if ($o->product == 1) {
+                saveReport('[P.6.2]', '12', __('Creating transfer ' . $o->name . '.'), null, 3, $o);
+            } else {
+                saveReport('[P.2.3]', '12', __('Transfer created ' . $o->name . '.'), null, 1, $o);
+            }
+
             // Generating flash message
             $request->session()->flash('message', 'Registro creado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-success'); 
@@ -120,9 +127,9 @@ class TransferController extends Controller
     {
         $this->validate($request,
             [ 
-                'partner'=>'required',
-                'product' => 'required',
-                'reference' => 'required',
+                // 'partner'=>'required',
+                // 'product' => 'required',
+                // 'reference' => 'required',
                 'qty' => 'required:integer',
             ]
         );
@@ -234,6 +241,11 @@ class TransferController extends Controller
         try {
             $p->save();
             $p->locations()->attach($transfer->sourceLocation->id, ['qty' => $transfer->qty]);
+
+            if ($transfer->reference == 'T213') {
+                saveReport('[P.5.2]', '3', __('Receipt T213 accepted for product ' . $p->name . '.'), null, 1);
+            }
+
 
             $request->session()->flash('message', 'Registro borrado satisfactoriamente'); 
             $request->session()->flash('alert-class', 'alert-info'); 

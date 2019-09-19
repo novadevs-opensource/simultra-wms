@@ -138,7 +138,7 @@
 							</div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
 							<label class="col-sm-2 col-form-label" for="parent_location"><b>{{ __('Parent location') }}</b></label>
 							<div class="col-sm-10">
                                 <select class="form-control" name="parent_location" id="parent_location">
@@ -151,7 +151,7 @@
                                     @endforeach
                                 </select>
 							</div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <div class="col-6">
@@ -171,6 +171,23 @@
 
                                             <option value="3">
                                                 Customer Location
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="location_category"><b>{{ __('Location category') }}</b></label>
+                                    <div class="col-8">
+                                        <select name="location_category" id="location_category" class="form-control">
+                                            <option value="1" @if ($loc->location_category == 1) selected @endif>
+                                                {{__('Conventional')}}
+                                            </option>
+                                            <option value="2" @if ($loc->location_category == 2) selected @endif>
+                                                {{__('Cantilever')}}
+                                            </option>
+
+                                            <option value="3" @if ($loc->location_category == 3) selected @endif>
+                                                {{__('Gravity')}}
                                             </option>
                                         </select>
                                     </div>

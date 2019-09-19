@@ -13,7 +13,7 @@
     <a href="{{route('setup.setup')}}">Administration</a>
 </li>
 <li class="breadcrumb-item active">
-    <a href="{{route('report')}}">Reports</a>
+    <a href="{{route('report.index')}}">Reports</a>
 </li>
 @endsection
 
@@ -36,8 +36,8 @@
             </li>
         </ul>
     </li>
-    <li class="{{isActiveRoute('report')}}">
-        <a href="{{route('report')}}">
+    <li class="{{isActiveroute('report.index')}}">
+        <a href="{{route('report.index')}}">
             {{__('Reports')}}
         </a>
     </li>

@@ -183,7 +183,7 @@
                                 @endif
                                     <td>
                                         @if ($i->image != null)
-                                            <img height="40" src="{{url('storage/'.$i->image)}}" alt="">
+                                            <img height="40" src="{{url($i->image)}}" alt="">
                                         @else
                                             <img height="40" src="{{asset('vendor/novadevs/simultra/whtools-simultra/forklift.png')}}" alt="">                            
                                         @endif

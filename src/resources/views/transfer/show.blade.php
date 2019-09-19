@@ -173,15 +173,19 @@
                                 <tr>
                                     <td><b>{{__('Reference')}}</b></td>
                                     <td>{{$o->reference}}</td>
-                                </tr>                                
+                                </tr>  
+                                @if ($o->destinationLocation->location_type != 1)
                                 <tr>
                                     <td><b>{{__('Destination location')}}</b></td>
                                     <td>{{$o->destinationLocation->name}}</td>
                                 </tr>
+                                @endif                              
+                                @if ($o->destinationLocation->location_type == 1)
                                 <tr>
                                     <td><b>{{__('Source location')}}</b></td>
                                     <td>{{$o->sourceLocation->name}}</td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <td><b>{{__('Creation date')}}</b></td>
                                     <td>{{$o->created_at}}</td>
@@ -204,6 +208,12 @@
                         </thead>
                         <tbody>
                                 <tr>
+                                    <td><b>{{__('Product')}}</b></td>
+                                    <td>
+                                        <a href="{{route('product.show', $o->products->id)}}">{{$o->products->name}}: {{$o->products->internal_reference}}</a>
+                                    </td>
+                                </tr> 
+                                <tr>
                                     <td><b>{{__('Quantity')}}</b></td>
                                     <td>{{$o->qty}}</td>
                                 </tr>                                
@@ -219,7 +229,13 @@
                                 </tr>
                                 <tr>
                                     <td><b>{{__('Source document')}}</b></td>
-                                    <td><a class="btn btn-xs btn-success" href="{{asset('/storage/docs'.'/stock.report_picking.pdf')}}"><i class="fa fa-download"></i></a></td>
+                                    <td>
+                                        @if ( $o->source_document )
+                                            <a class="btn btn-xs btn-success" href="{{asset($o->source_document)}}"><i class="fa fa-download"></i></a>
+                                        @else
+                                            <i>{{__('Without document')}}</i>
+                                        @endif
+                                    </td>
                                 </tr>
                         </tbody>
                     </table>  

@@ -62,6 +62,34 @@ class StockMoveController extends Controller
             $o = new StockMove($request->all());
             $o->save();
             $this->adjustProductQty($request);
+
+            // Reporting
+            switch ($o->product) {
+                case 1: // HP DESKJET
+                    saveReport('[P.2.2]', '2', __('Searching product id' . $o->product . '.'), null, 1);
+                    saveReport('[P.2.3]', '11', __('Creating stock move ' . $o->name . 'for product id ' . $o->product), null, 1, $o);
+                    break;
+
+                case 2: // PLÁTANO
+                    saveReport('[P.4.3]', '4', __('Creating stock move ' . $o->name . '.'), null, 3, $o);
+                    break;
+
+                case 3: // PLÁTANO
+                    saveReport('[P.4.3]', '4', __('Creating stock move ' . $o->name . '.'), null, 3, $o);
+                    break;
+
+                case 4: // PLÁTANO
+                    saveReport('[P.4.3]', '4', __('Creating stock move ' . $o->name . '.'), null, 3, $o);
+                    break;
+                
+                case 5:
+                    saveReport('[P.5.5]', '12', __('Creating stock move ' . $o->name . '.'), null, 3, $o);
+                    break;
+
+                default:
+                    break;
+            }
+            
             
             // Generating flash message
             $request->session()->flash('message', 'Registro creado satisfactoriamente'); 
@@ -197,6 +225,16 @@ class StockMoveController extends Controller
                     $p->locations()->updateExistingPivot($source_location, ['qty' => $newQty]);
                 }
             }
+
+            // Deleting pivot if new qty = 0
+            foreach ($p->locations as $i) {
+                if( $i->id == $source_location->id) {
+                    if ($i->pivot->qty <= 0) {
+                        $p->locations()->detach($source_location->id);
+                    }
+                }
+            }
+            
             // CREATING NEW STOCK PRODUCT LOCATIONS
             $p->locations()->attach($destination_location->id, ['qty' => $request->qty]);   
                    

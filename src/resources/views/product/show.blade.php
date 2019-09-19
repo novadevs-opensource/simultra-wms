@@ -146,6 +146,7 @@
                                 <th>{{__('Price')}}</th>
                                 <th>{{ __('EAN13 Code') }}</th>
                                 <th>{{ __('Internal reference') }}</th>
+                                <th>{{__('Date of expiry')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,6 +154,13 @@
                                 <td>{{$o->price}} €</td>
                                 <td>{{$o->ean13}}</td>
                                 <td>{{$o->internal_reference}}</td>
+                                <td>
+                                    @if ($o->date_of_expiry != null)
+                                        {{$o->date_of_expiry}}
+                                    @else
+                                        {{__('Non perishable')}}
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -256,9 +264,20 @@
 @endsection
 @section('custom-js')
 <script>
-        document.getElementById('print').addEventListener('click', function(){
-            printElem('labelable');
+    document.getElementById('print').addEventListener('click', function(){
+        printElem('labelable');
+        $.ajax({
+            /* the route pointing to the post function */
+            url: '/product-label-report' + '/' + {{$o->id}},
+            type: 'GET',
+            /* send the csrf-token and the input to the controller */
+            dataType: 'JSON',
+            /* remind that 'data' is the response of the AjaxController */
+            success: function (data) { 
+                console.log('Success... for ' + data);
+            }
         });
+    });
 
     function printElem(elem)
     {

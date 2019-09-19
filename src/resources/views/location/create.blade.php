@@ -128,7 +128,7 @@
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label" for="name"><b>{{ __('Location name') }}</b></label>
 							<div class="col-sm-10">
-                                <input type="text" name="name" id="name" class="form-control  @error('name') is-invalid @enderror">
+                                <input type="text" name="name" id="name" class="form-control  @error('name') is-invalid @enderror" value="{{old('name')}}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -137,7 +137,7 @@
 							</div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
 							<label class="col-sm-2 col-form-label" for="parent_location"><b>{{ __('Parent location') }}</b></label>
 							<div class="col-sm-10">
                                 <select class="form-control" name="parent_location" id="parent_location">
@@ -146,7 +146,7 @@
                                     @endforeach
                                 </select>
 							</div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <div class="col-6">
@@ -158,33 +158,40 @@
                                     <div class="col-8">
                                         <select name="location_type" id="location_type" class="form-control">
                                             <option value="1">
-                                                Supplier Location
+                                                {{__('Supplier Location')}}
                                             </option>
                                             <option value="2">
-                                                Internal Location
+                                                {{__('Internal Location')}}
+
                                             </option>
 
                                             <option value="3">
-                                                Customer Location
+                                                {{__('Customer Location')}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>                                
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label" for="location_category"><b>{{ __('Location category') }}</b></label>
+                                    <div class="col-8">
+                                        <select name="location_category" id="location_category" class="form-control">
+                                            <option value="1">
+                                                {{__('Conventional')}}
+                                            </option>
+                                            <option value="2">
+                                                {{__('Cantilever')}}
+                                            </option>
+
+                                            <option value="3">
+                                                {{__('Gravity')}}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
-                                    <label class="col-4 col-form-label" for="active"><b>{{ __('Is active?') }}</b></label>
-                                    <div class="i-checks">
-                                        <label class=""> 
-                                            <div class="icheckbox_square-green checked" style="position: relative;">
-                                                <input type="checkbox" value="" checked="" style="position: absolute; opacity: 0;">
-                                                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                            </div> 
-                                            <i></i> Option two checked
-                                        </label>
-                                    </div>
-                                </div> --}}
+
                                 <div class="form-group row">
                                     <label class="col-12 col-form-label" for="active"><b>{{ __('Is active?') }}</b>
-                                        <input type="checkbox" name="active" id="active" checked="" class="">                                        
+                                        <input type="checkbox" name="active" id="active" checked="" class="" value="{{old('active')}}">                                        
                                     </label>
                                 </div>
                             </div>
@@ -197,7 +204,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label" for="localization_x"><b>{{ __('Corridor (X)') }}</b></label>
                                     <div class="col-8">
-                                        <input type="number" class="form-control  @error('localization_x') is-invalid @enderror" name="localization_x" id="localization_x" placeholder="0">
+                                        <input type="number" class="form-control  @error('localization_x') is-invalid @enderror" name="localization_x" id="localization_x" placeholder="0" value="{{old('localization_x')}}">
                                         @error('localization_x')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -209,7 +216,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label" for="localization_y"><b>{{ __('Shelves (Y)') }}</b></label>
                                     <div class="col-8">
-                                        <input type="number" class="form-control @error('localization_y') is-invalid @enderror" name="localization_y" id="localization_y" placeholder="0">
+                                        <input type="number" class="form-control @error('localization_y') is-invalid @enderror" name="localization_y" id="localization_y" placeholder="0" value="{{old('localization_y')}}">
                                         @error('localization_y')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -221,7 +228,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label" for="localization_z"><b>{{ __('Height (Z)') }}</b></label>
                                     <div class="col-8">
-                                        <input type="number" class="form-control @error('localization_z') is-invalid @enderror" name="localization_z" id="localization_z" placeholder="0">
+                                        <input type="number" class="form-control @error('localization_z') is-invalid @enderror" name="localization_z" id="localization_z" placeholder="0" value="{{old('localization_z')}}">
                                         @error('localization_z')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -233,7 +240,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label" for="location_barcode"><b>{{ __('Location barcode') }}</b></label>
                                     <div class="col-8">
-                                        <input type="text" class="form-control @error('location_barcode') is-invalid @enderror" name="location_barcode" id="location_barcode">
+                                        <input type="text" class="form-control @error('location_barcode') is-invalid @enderror" name="location_barcode" id="location_barcode" value="{{old('location_barcode')}}">
                                         @error('location_barcode')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -247,7 +254,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <label  class="col-form-label" for="additional_information"><b>{{__('Additional information')}}</b></label>
-                                <textarea name="additional_information" id="additional_information" cols="30" rows="10" class="form-control @error('additional_information') is-invalid @enderror"></textarea>
+                                <textarea name="additional_information" id="additional_information" cols="30" rows="10" class="form-control @error('additional_information') is-invalid @enderror" value="{{old('additional_information')}}"></textarea>
                                 @error('additional_information')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

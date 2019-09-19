@@ -191,6 +191,9 @@
                                         <th>
                                             {{__('Internal reference')}}
                                         </th>
+                                        <th>
+                                            {{__('Location')}}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -205,6 +208,9 @@
                                         <td>
                                             {{$i->internal_reference}}
                                         </td>
+                                        <td>
+                                            <a href="{{route('location.show', $i->locations[0]->id)}}">{{$i->locations[0]->name}}</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -215,7 +221,7 @@
                 <div class="col-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h3>{{_('Map')}}</h3>
+                            <h3>{{__('Map')}}</h3>
                         </div>
                         <div class="ibox-content">
                             @switch($o->id)

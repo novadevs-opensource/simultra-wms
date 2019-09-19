@@ -155,8 +155,8 @@
                                 <th>{{__('Destination location')}}</th>
                                 <th>{{__('Partner')}}</th>
                                 {{-- <th>{{__('Creation date')}}</th> --}}
-                                <th>{{__('Status')}}</th>
-                                <th id="step3-1">{{__('Source document')}}</th>
+                                <th class="text-center">{{__('Status')}}</th>
+                                <th class="text-center" id="step3-1">{{__('Source document')}}</th>
                                 <th>{{__('Actions')}}</th>                                
                             </tr>
                         </thead>
@@ -165,11 +165,21 @@
                                 <tr>
                                     <td>{{$i->reference}}</td>
                                     <td>
-                                        @if ($i->sourceLocation->location_type == 1)
+                                        {{-- @if ($i->sourceLocation->location_type == 1)
                                             <span class="label label-info">
                                                 Receipt
                                             </span>
                                         @elseif($i->sourceLocation->location_type == 3)
+                                            <span class="label label-danger">
+                                                Delivery order
+                                            </span>
+                                        @endif --}}
+
+                                        @if ($i->sourceLocation->id == 109)
+                                            <span class="label label-info">
+                                                Receipt
+                                            </span>
+                                        @else
                                             <span class="label label-danger">
                                                 Delivery order
                                             </span>
@@ -188,11 +198,14 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-exclamation"></i> {{__('Not available') }}                                        
-                                        {{-- <a class="btn btn-xs btn-success" href="{{ Storage::url($i->source_document) }}" target="_blank">
-                                            <i class="fa fa-download"></i>
-                                        </a> --}}
+                                    <td class="text-center">                                     
+                                        @if ( $i->source_document )
+                                            <a class="btn btn-xs btn-success" href="{{ asset($i->source_document) }}" target="_blank">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        @else
+                                            <i>{{__('Without document')}}</i>
+                                        @endif
                                     </td>
                                     <td>
                                         <form action="{{route('transfer.destroy', $i->id)}}" method="POST">
