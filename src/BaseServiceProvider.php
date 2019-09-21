@@ -26,6 +26,8 @@ class BaseServiceProvider extends ServiceProvider
         $this->app->bind('ModuleInterface', function($app) {
             return new ModuleRepository( new Module() );
         });
+
+        $this->registerDeps();
     }
 
     /**
@@ -131,6 +133,25 @@ class BaseServiceProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('role', '\Novadevs\Simultra\Base\Http\Middleware\CheckRole::class');
         $router->pushMiddlewareToGroup('web', '\Novadevs\Simultra\Base\Http\Middleware\Localization::class');
+    }
+
+    /**
+     * Registers each package dependency
+     *
+     * @return void
+     */
+    public function registerDeps()
+    {
+        /*
+         * Register the service provider for the Milon/Barcode dependency.
+         */
+        $this->app->register('Milon\Barcode\BarcodeServiceProvider');
+        /*
+         * Create aliases for the Milon/Barcode dependency.
+         */
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('DNS1D', 'Milon\Barcode\Facades\DNS1DFacade');
+        $loader->alias('DNS2D', 'Milon\Barcode\Facades\DNS2DFacade::class');
     }
 
     /**
