@@ -70,6 +70,15 @@
                                 @case('en')
                                     English
                                     @break
+                                @case('fr')
+                                    French
+                                    @break
+                                @case('it')
+                                    Italian
+                                    @break
+                                @case('nl')
+                                    Dutch
+                                    @break
                                 @default
                             @endswitch
                         </a>
