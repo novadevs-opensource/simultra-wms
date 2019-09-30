@@ -441,6 +441,7 @@ CREATE TABLE `wh_tools` (
 LOCK TABLES `wh_tools` WRITE;
 /*!40000 ALTER TABLE `wh_tools` DISABLE KEYS */;
 INSERT INTO `wh_tools` VALUES (1,'2019-05-23 00:42:37','2019-09-18 06:27:48','Forklift','RE001',NULL,0,1,'vendor/novadevs/simultra/whtools-simultra/forklift.png'),(2,'2019-06-11 13:17:50','2019-09-11 10:25:23','Electric trolley','RE002',NULL,0,1,'vendor/novadevs/simultra/whtools-simultra/electricTrolley.png'),(3,'2019-06-11 13:18:27','2019-06-11 13:18:27','Retractable forklift','RE003',NULL,0,NULL,''),(4,'2019-09-10 13:12:25','2019-09-11 10:23:59','Handcart','RE004',NULL,0,1,'vendor/novadevs/simultra/whtools-simultra/handcart.png');
+UPDATE `simultra`.`wh_tools` SET `image`='vendor/novadevs/simultra/whtools-simultra/retractable.png' WHERE `id`='3';
 /*!40000 ALTER TABLE `wh_tools` ENABLE KEYS */;
 UNLOCK TABLES;
 

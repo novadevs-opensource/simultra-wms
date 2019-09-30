@@ -106,7 +106,7 @@
 		</div>
 		<div class="mail-box">
 			<div class="mail-body">
-				{!! $o->body !!}
+				{!!__($o->body)!!}
 			</div>
 			@if ( $o->attachments )	
 			<div class="mail-attachment">

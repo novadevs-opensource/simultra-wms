@@ -18,13 +18,14 @@ class BaseServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/mod-conf.php', 'dolivel-base'
+            __DIR__ . '/config/mod-conf.php',
+            'dolivel-base'
         );
 
         $this->app->make('Novadevs\Simultra\Base\Http\Controllers\BaseCompanyController');
 
-        $this->app->bind('ModuleInterface', function($app) {
-            return new ModuleRepository( new Module() );
+        $this->app->bind('ModuleInterface', function ($app) {
+            return new ModuleRepository(new Module());
         });
 
         $this->registerDeps();
@@ -72,7 +73,6 @@ class BaseServiceProvider extends ServiceProvider
         $this->registerHelpers();
 
         $this->registerMiddlewares();
-
     }
 
     /**
@@ -121,8 +121,7 @@ class BaseServiceProvider extends ServiceProvider
     public function registerHelpers()
     {
         // Load the helpers in app/Http/helpers.php
-        if ( file_exists($file = __DIR__ .'/Http/helpers.php') )
-        {
+        if (file_exists($file = __DIR__ .'/Http/helpers.php')) {
             require $file;
         }
     }

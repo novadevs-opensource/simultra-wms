@@ -1,7 +1,6 @@
 <?php
 
-if (! function_exists('isActiveRoute'))
-{
+if (! function_exists('isActiveRoute')) {
     function isActiveRoute($route, $output = 'active')
     {
         $routeArray = explode('.', $route);
@@ -13,8 +12,7 @@ if (! function_exists('isActiveRoute'))
     }
 }
 
-if (! function_exists('isActiveRouteChild'))
-{
+if (! function_exists('isActiveRouteChild')) {
     function isActiveRouteChild($route, $output = 'active')
     {
         if (Route::currentRouteName() == $route) {
@@ -23,38 +21,36 @@ if (! function_exists('isActiveRouteChild'))
     }
 }
 
-if (! function_exists('download')) 
-{
-    function download( $filename = '' ) { 
+if (! function_exists('download')) {
+    function download($filename = '')
+    {
 
     // $filename = explode('/', $filename);
 
-    // Check if file exists in storage directory
-    $file_path = storage_path() . '/app/' . $filename; 
+        // Check if file exists in storage directory
+        $file_path = storage_path() . '/app/' . $filename;
 
-    if ( file_exists( $file_path ) ) { 
-        // Send Download 
-        return \Response::download( $file_path );
-    
-        } else { 
-        // Error exit( 'Requested file does not exist on our server!' ); 
+        if (file_exists($file_path)) {
+            // Send Download
+            return \Response::download($file_path);
+        } else {
+            // Error exit( 'Requested file does not exist on our server!' );
         }
     }
 }
 
-if (! function_exists('locales')) 
-{
+if (! function_exists('locales')) {
     function locales()
     {
         $dir = resource_path('lang');
-        $files = array_diff( scandir($dir), array('..', '.') );
+        $files = array_diff(scandir($dir), array('..', '.'));
 
         $langs = array();
 
         foreach ($files as $i) {
             $filename = explode('.', $i);
-            if ( isset($filename[1]) ) {
-                if ( $filename[1] == 'json' ) {
+            if (isset($filename[1])) {
+                if ($filename[1] == 'json') {
                     array_push($langs, $filename[0]);
                 }
             }
@@ -64,8 +60,7 @@ if (! function_exists('locales'))
     }
 }
 
-if (! function_exists('isActiveLocale') ) 
-{
+if (! function_exists('isActiveLocale')) {
     function isActiveLocale($locale, $request)
     {
         if ($locale == session()->get('locale') || $locale == $request->cookie('locale')) {
@@ -73,28 +68,27 @@ if (! function_exists('isActiveLocale') )
         } else {
             return "default";
         }
-
     }
 }
 
-if (! function_exists('unreadEmails') ) {
-   function unreadEmails()
-   {
+if (! function_exists('unreadEmails')) {
+    function unreadEmails()
+    {
         $o = Novadevs\Simultra\Base\Models\Mail::where('is_read', '=', 0)
                                                ->where('to', '=', Auth::user()->email)
                                                ->get();
-        if ( count($o) == 0) {
+        if (count($o) == 0) {
             return false;
         } else {
             return count($o);
         }
-   }
+    }
 }
 
-if (! function_exists('saveReport') ) {
+if (! function_exists('saveReport')) {
     /**
      * Undocumented function
-     * 
+     *
      * @uses Report::_record $t->_record()
      *
      * @param string $action - Practice´s identificator
@@ -103,24 +97,24 @@ if (! function_exists('saveReport') ) {
      * @param bool $mode - Quest mode or not
      * @param int $numberOfRecords - Number of times that record can be stored
      * @param object $additional - Eloquent object
-     * 
+     *
      * @return void
      */
     function saveReport($action = null, $points = null, $desc = null, $mode = null, $numberOfRecords = null, $additional = null)
-    {   
+    {
         $t = new Novadevs\Simultra\Base\Models\Report();
         $t->_record($action, $points, $desc, $mode, $numberOfRecords, $additional);
     }
 }
 
-if (! function_exists('checkMode') ) {
-    function  checkMode($request)
+if (! function_exists('checkMode')) {
+    function checkMode($request)
     {
-        if ( $request->cookie('mode') ) {
-            if ( $request->cookie('mode') == 2) {
+        if ($request->cookie('mode')) {
+            if ($request->cookie('mode') == 2) {
                 // Quest mode
                 return true;
-            } elseif ( $request->cookie('mode') == 1) {
+            } elseif ($request->cookie('mode') == 1) {
                 // Demo mode
                 return false;
             }
@@ -131,12 +125,12 @@ if (! function_exists('checkMode') ) {
 }
 
 
-if (! function_exists('checkRole') ) {
-    function  checkRole($userRole, $role)
+if (! function_exists('checkRole')) {
+    function checkRole($userRole, $role)
     {
-        if ( $userRole != $role) {
+        if ($userRole != $role) {
             // return redirect('home');
-           return false;
+            return false;
         } else {
             return true;
         }

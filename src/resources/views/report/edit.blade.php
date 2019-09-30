@@ -136,8 +136,8 @@
                     <input type="hidden" name="data" value="" id="data">
                     <div class="row form-group">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">{{_('Save')}}</button>
-                            <a href="{{route('report.show', $o->id)}}" class="btn btn-danger">{{_('Cancel')}}</a>
+                            <button type="submit" class="btn btn-primary">{{__('Save')}}</button>
+                            <a href="{{route('report.show', $o->id)}}" class="btn btn-danger">{{__('Cancel')}}</a>
                         </div>
                     </div>
                     </form>

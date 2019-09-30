@@ -1,5 +1,12 @@
 {
     "Home area": "Home area",
     "Informations": "Informations",
-    "All operations": "Todas las operaciones"
+    "All operations": "Todas las operaciones",
+    "<p>Hola usuario,</p><p>Debes dar de alta en el sistema tres productos nuevos, los cuales te adjunto en el presente correo.</p><p>Saludos</p>":"<p> Hello user, </p> <p> You must register three new products in the system, which I attach to you in this email. </p> <p> Greetings </p>",
+    "<p>Hola usuario,</p><p>Creemos que has recibido un envío nuestro, ¿Puedes comprobarlo?</p><p>Saludos</p>":"<p> Hello user, </p> <p> We believe you have received a shipment from us, can you check it? </p> <p> Greetings </p>",
+    "<p>Hola usuario,</p><p>Debes dar de alta en el sistema un nuevo almacén llamado Warehouse 4 (WH4), te adjunto el plano en el presente correo.</p><p>Saludos</p>":"<p> Hello user, </p> <p> You must register in the system a new warehouse called Warehouse 4 (WH4), I enclose the plan in this email. </p> <p> Greetings </ p >",
+    "<p>Hola usuario,</p><p>En las localizaciones CONV1100, CONV1101 y CONV1102 hay almacenados 3 pallets perecederos con distintas caducidades, es necesario cambiar su localización a una más conveniente. Debes hacer 3 movimientos de stock, uno para cada localización</p><p>Saludos</p>":"<p> Hello user, </p> <p> In the CONV1100, CONV1101 and CONV1102 locations there are 3 perishable pallets stored with different expiration dates, you need to change your location to a more convenient one. You must make 3 stock movements, one for each location </p> <p> Greetings </p>",
+    "<p>Hola usuario,</p><p>Se ha producido una ruptura de stock del producto con la referencia PRD003, debemos solucionar el problema. El sistema ha detectado el problema y se ha creado el pedido T213, debes aprobarlo y direccionar los productos.</p><p>Saludos</p>":"<p> Hello user, </p> <p> There has been a stock break of the product with the reference PRD003, we must solve the problem. The system has detected the problem and the T213 order has been created, you must approve it and direct the products. </p> <p> Greetings </p>",
+    "<p>Hola usuario,</p><p>Necesitamos 5 unidades del producto PRD001 para mañana.</p><p>Saludos</p>":"<p> Hello user, </p> <p> We need 5 units of the PRD001 product for tomorrow. </p> <p> Greetings </p>",
+    "<p>Hola usuario,</p><p>Ha llegado el momento del inventario, necesitamos que realices inventario de los almacenes 1, 2 y 3 para mañana.</p><p>Saludos</p>":"<p> Hello user, </p> <p> The time has come for inventory, we need you to take inventory of stores 1, 2 and 3 for tomorrow. </p> <p> Greetings </p>"
 }
