@@ -1,6 +1,6 @@
 * text=auto
 *.blade.php linguist-language=Blade
-*.php linguist-language=Php
+*.php linguist-language=PHP
 *.css linguist-vendored
 *.scss linguist-vendored
 *.js linguist-vendored
